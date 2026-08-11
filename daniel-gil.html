@@ -325,59 +325,56 @@
     .note-box p { font-size: 13px; color: rgba(200,184,96,0.9); line-height: 1.6; }
     .note-box p strong { color: #e8d870; }
 
-    /* ── Web add-on ─────────────────────────────────────────────── */
-    .web-card {
+    /* ── Enfoque / pillars ──────────────────────────────────────── */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 860px) { .pillars-grid { grid-template-columns: 1fr; } }
+    .pillar-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 20px;
-      overflow: hidden;
-      position: relative;
+      padding: 30px 26px;
+      transition: all 0.3s ease;
     }
-    .web-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan), var(--purple-lt));
+    .pillar-card:hover {
+      border-color: rgba(161,0,255,0.35);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(161,0,255,0.15);
     }
-    .web-inner {
-      padding: 44px;
-      display: grid;
-      grid-template-columns: 1fr 220px;
-      gap: 44px;
+    .pillar-num {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      display: flex;
       align-items: center;
-    }
-    @media (max-width: 760px) { .web-inner { grid-template-columns: 1fr; } }
-    .web-title { font-size: 1.4rem; font-weight: 900; letter-spacing: -0.3px; margin-bottom: 12px; }
-    .web-desc { font-size: 15px; color: var(--muted); line-height: 1.75; }
-    .web-pricing {
-      text-align: center;
-      background: rgba(161,0,255,0.06);
-      border: 1px solid rgba(161,0,255,0.15);
-      border-radius: 14px;
-      padding: 28px 20px;
-    }
-    .web-per { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-    .web-price {
-      font-size: 2rem;
+      justify-content: center;
+      font-size: 15px;
       font-weight: 900;
-      letter-spacing: -1px;
-      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      margin-bottom: 18px;
     }
-    .web-unit { font-size: 12px; color: var(--muted); margin-top: 3px; }
-    .web-divider { border: none; border-top: 1px solid rgba(161,0,255,0.1); margin: 18px 0; }
-    .web-total-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
-    .web-total {
-      font-size: 1.4rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--cyan), var(--purple-lt));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .pillar-title { font-size: 1.05rem; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.2px; }
+    .pillar-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+    /* ── Final note ─────────────────────────────────────────────── */
+    .final-note {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: rgba(255,200,0,0.05);
+      border: 1px solid rgba(255,200,0,0.15);
+      border-radius: 16px;
+      padding: 24px 26px;
     }
+    .final-note-icon { font-size: 18px; flex-shrink: 0; }
+    .final-note-title { font-size: 14px; font-weight: 700; color: #e8d870; margin-bottom: 8px; }
+    .final-note ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .final-note li { font-size: 13px; color: rgba(200,184,96,0.9); line-height: 1.6; padding-left: 14px; position: relative; }
+    .final-note li::before { content: '–'; position: absolute; left: 0; }
 
     /* ── Closing ────────────────────────────────────────────────── */
     .closing {
@@ -458,15 +455,46 @@
   <div class="hero-content">
     <div class="badge"><span class="badge-dot"></span>Propuesta Comercial · Agosto 2026</div>
     <h1 class="hero-title">
-      Marketing Digital<br />
-      <span class="gradient">para Daniel Gil</span>
+      Posicionamiento de marca<br />
+      <span class="gradient">y ventas para Daniel Gil</span>
     </h1>
     <p class="hero-sub">
       Contenido, redes sociales, YouTube y pauta digital<br />
-      <strong>enfocados en atraer clientes mes a mes.</strong>
+      <strong>enfocados en construir marca y convertir en ventas mes a mes.</strong>
     </p>
   </div>
 </div>
+
+<!-- ══════════════════════════════════════════
+     ENFOQUE ESTRATÉGICO
+══════════════════════════════════════════ -->
+<section>
+  <div class="blob" style="width:500px;height:400px;background:radial-gradient(ellipse,rgba(161,0,255,0.06) 0%,transparent 70%);top:-100px;right:-100px;filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Un plan pensado<br /><span class="gradient">para posicionar y vender</span></h2>
+      <p class="section-sub">No se trata solo de publicar contenido. Cada pieza y cada peso de pauta están conectados a un mismo objetivo: que más personas conozcan tu marca y terminen comprando.</p>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">Posicionamiento de marca</div>
+        <p class="pillar-desc">Contenido constante y de calidad en redes sociales y YouTube que construye una imagen profesional, confiable y reconocible para tu marca.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">Generación de demanda</div>
+        <p class="pillar-desc">Pauta digital administrada estratégicamente para poner tu marca frente a las personas correctas, en el momento correcto.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">Conversión en ventas</div>
+        <p class="pillar-desc">Cada contenido y cada campaña está pensado para mover al cliente potencial hacia la decisión de compra, no solo para generar likes.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ══════════════════════════════════════════
      PLAN MENSUAL
@@ -476,7 +504,7 @@
   <div class="container" style="position:relative;z-index:1;">
     <div class="section-header">
       <h2 class="section-title">Plan mensual<br /><span class="gradient">de marketing digital</span></h2>
-      <p class="section-sub">Estrategia de marketing, creación de contenido para redes sociales y YouTube, y administración de pauta digital — una jornada de grabación al mes.</p>
+      <p class="section-sub">Estrategia de marketing, creación de contenido para redes sociales y YouTube, y administración de pauta digital — todo orientado a posicionar tu marca y aumentar tus ventas.</p>
       <div style="margin-top:18px;"><span class="special-badge">★ Precio especial este mes</span></div>
     </div>
 
@@ -567,38 +595,6 @@
         </div>
       </div>
     </div>
-
-    <div class="note-box">
-      <span style="font-size:16px;flex-shrink:0;">⚠️</span>
-      <p><strong>Nota:</strong> El presupuesto de pauta publicitaria (Meta Ads, TikTok Ads) <strong>no está incluido</strong> en este valor. Se define por separado.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     PÁGINA WEB (ADD-ON)
-══════════════════════════════════════════ -->
-<section class="alt">
-  <div class="blob" style="width:400px;height:400px;background:radial-gradient(circle,rgba(0,212,255,0.08) 0%,transparent 65%);bottom:-80px;right:-80px;filter:blur(60px);"></div>
-  <div class="container" style="position:relative;z-index:1;">
-    <div class="section-header">
-      <h2 class="section-title">Servicio adicional:<br /><span class="gradient">Página web</span></h2>
-      <p class="section-sub">Además del marketing mensual, podemos crear una página web profesional.</p>
-    </div>
-
-    <div class="web-card">
-      <div class="web-inner">
-        <div>
-          <div class="web-title">Página web moderna</div>
-          <p class="web-desc">Un sitio web rápido, bien diseñado y fácil de encontrar en Google. Presentación de servicios, formulario de contacto y todo lo que el cliente necesita para decidirse.</p>
-        </div>
-        <div class="web-pricing">
-          <div class="web-per">Valor único</div>
-          <div class="web-price">$800.000</div>
-          <div class="web-unit">COP</div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -614,6 +610,25 @@
       <p class="closing-text" style="position:relative;z-index:1;">
         Queremos ser tu aliado digital. <strong>Más clientes, más presencia, más resultados</strong>, mes a mes.
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONSIDERACIONES FINALES
+══════════════════════════════════════════ -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="final-note">
+      <span class="final-note-icon">⚠️</span>
+      <div>
+        <div class="final-note-title">Esta cotización no incluye:</div>
+        <ul>
+          <li>La inversión en pauta digital (Meta Ads, TikTok Ads, Google Ads) — se define por separado según objetivos y presupuesto.</li>
+          <li>Diseño y desarrollo de página web u otras piezas fuera de lo listado en el plan.</li>
+          <li>Costos de producción adicionales no contemplados en la jornada de grabación mensual (actores, locaciones especiales, licencias de música, etc.).</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
