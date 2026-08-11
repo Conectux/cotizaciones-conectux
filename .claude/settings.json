@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git --version)",
+      "Bash(rm -rf .git && git init -b main)"
+    ],
+    "additionalDirectories": [
+      "/Users/pipe/Documents/Projects/cotizacion-daniel-gil/.git"
+    ]
+  }
+}
