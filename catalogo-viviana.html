@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propuesta Comercial – Conectux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #09090f;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    :root {
+      --purple:    #a100ff;
+      --purple-lt: #c84bff;
+      --purple-dk: #7b00cc;
+      --cyan:      #00d4ff;
+      --green:     #4ade80;
+      --muted:     rgba(160,160,184,0.85);
+      --card-bg:   rgba(255,255,255,0.05);
+      --card-border: rgba(161,0,255,0.15);
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    /* ── Navbar ─────────────────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: rgba(9,9,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 10px var(--purple);
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: 160px 48px 100px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .dot-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(161,0,255,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(161,0,255,0.1);
+      border: 1px solid rgba(161,0,255,0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--purple-lt);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); }
+    .hero-title {
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+    .gradient {
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .hero-sub strong { color: #fff; }
+
+    /* ── Sections ───────────────────────────────────────────────── */
+    section {
+      padding: 80px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    section.alt { background: #0d0d1e; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-header { margin-bottom: 48px; }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-sub { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 560px; }
+
+    /* ── Pricing cards ──────────────────────────────────────────── */
+    .schools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 760px;
+      margin: 0 auto;
+      gap: 20px;
+    }
+    @media (max-width: 860px) { .schools-grid { grid-template-columns: 1fr; } }
+
+    .school-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+    .school-card:hover {
+      border-color: rgba(161,0,255,0.35);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(161,0,255,0.15);
+    }
+    .school-avatar {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 900;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      margin-bottom: 18px;
+    }
+    .school-name { font-size: 1.2rem; font-weight: 900; margin-bottom: 4px; }
+    .school-type { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+    .services-list { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .services-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(161,0,255,0.1);
+      border: 1px solid rgba(161,0,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+      color: var(--purple-lt);
+      font-weight: 900;
+      margin-top: 1px;
+    }
+    .school-price {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(161,0,255,0.1);
+    }
+    .price-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .price-amount {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .price-currency { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Info / step cards ──────────────────────────────────────── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    @media (max-width: 860px) { .grid-2 { grid-template-columns: 1fr; } }
+    .pillar-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px 26px;
+      transition: all 0.3s ease;
+    }
+    .pillar-card:hover {
+      border-color: rgba(161,0,255,0.35);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(161,0,255,0.15);
+    }
+    .pillar-num {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 900;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      margin-bottom: 18px;
+    }
+    .pillar-title { font-size: 1.05rem; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.2px; }
+    .pillar-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+    /* ── Summary ────────────────────────────────────────────────── */
+    .summary-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .summary-table { width: 100%; border-collapse: collapse; }
+    .summary-table thead th {
+      background: rgba(161,0,255,0.07);
+      padding: 14px 28px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+    }
+    .summary-table tbody tr { border-bottom: 1px solid rgba(161,0,255,0.07); }
+    .summary-table tbody tr:last-child { border-bottom: none; }
+    .summary-table tbody td { padding: 16px 28px; font-size: 15px; }
+    .td-name { font-weight: 700; }
+    .td-price {
+      font-weight: 900;
+      text-align: right;
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+    }
+    .summary-total {
+      background: linear-gradient(90deg, rgba(161,0,255,0.1), rgba(0,212,255,0.05));
+      border-top: 1px solid rgba(161,0,255,0.2);
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .total-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+    .total-amount {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .total-currency { font-size: 14px; color: var(--muted); margin-left: 6px; }
+
+    .note-box {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: rgba(255,200,0,0.05);
+      border: 1px solid rgba(255,200,0,0.15);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 20px;
+    }
+    .note-box p { font-size: 13px; color: rgba(200,184,96,0.9); line-height: 1.6; }
+    .note-box p strong { color: #e8d870; }
+
+    /* ── Final note ─────────────────────────────────────────────── */
+    .final-note {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: rgba(255,200,0,0.05);
+      border: 1px solid rgba(255,200,0,0.15);
+      border-radius: 16px;
+      padding: 24px 26px;
+    }
+    .final-note-icon { font-size: 18px; flex-shrink: 0; }
+    .final-note-title { font-size: 14px; font-weight: 700; color: #e8d870; margin-bottom: 8px; }
+    .final-note ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .final-note li { font-size: 13px; color: rgba(200,184,96,0.9); line-height: 1.6; padding-left: 14px; position: relative; }
+    .final-note li::before { content: '–'; position: absolute; left: 0; }
+
+    /* ── Closing ────────────────────────────────────────────────── */
+    .closing {
+      background: rgba(161,0,255,0.05);
+      border: 1px solid rgba(161,0,255,0.15);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .closing-title { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 16px; }
+    .closing-text { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 560px; margin: 0 auto 28px; }
+    .closing-text strong { color: var(--purple-lt); }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    footer {
+      background: #060610;
+      border-top: 1px solid rgba(161,0,255,0.1);
+      padding: 36px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 7px; }
+    .footer-copy { font-size: 13px; color: rgba(90,90,120,0.9); }
+
+    @media (max-width: 600px) {
+      section { padding: 60px 24px; }
+      .hero { padding: 120px 24px 80px; }
+      .navbar { padding: 0 24px; }
+      footer { padding: 28px 24px; }
+
+      .badge { font-size: 13px; }
+      .section-sub { font-size: 16px; }
+      .school-type { font-size: 14px; }
+      .services-list li { font-size: 15.5px; }
+      .price-label { font-size: 12px; }
+      .price-currency { font-size: 13px; }
+      .pillar-title { font-size: 1.15rem; }
+      .pillar-desc { font-size: 15px; }
+      .summary-table thead th { font-size: 12px; }
+      .summary-table tbody td { font-size: 16px; }
+      .total-label { font-size: 14px; }
+      .total-currency { font-size: 15px; }
+      .closing-text { font-size: 16px; }
+      .final-note-title { font-size: 15px; }
+      .final-note li { font-size: 14.5px; }
+      .footer-copy { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar no-print">
+  <div class="logo">
+    <span class="logo-dot"></span>
+    Conectux
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<div class="hero">
+  <div class="dot-grid"></div>
+  <div class="blob" style="width:600px;height:600px;background:radial-gradient(circle,rgba(161,0,255,0.2) 0%,transparent 65%);top:-180px;left:-150px;animation:f1 10s ease-in-out infinite;"></div>
+  <div class="blob" style="width:450px;height:450px;background:radial-gradient(circle,rgba(0,212,255,0.1) 0%,transparent 65%);bottom:-120px;right:-80px;animation:f2 12s ease-in-out infinite;"></div>
+  <style>
+    @keyframes f1 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(50px,70px) scale(1.05)} }
+    @keyframes f2 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(-60px,-50px) scale(1.08)} }
+  </style>
+
+  <div class="hero-content">
+    <div class="badge"><span class="badge-dot"></span>Propuesta Comercial · Agosto 2026</div>
+    <h1 class="hero-title">
+      Diseño de Catálogo<br />
+      <span class="gradient">Comercial para Viviana</span>
+    </h1>
+    <p class="hero-sub">
+      Catálogo para tu marca de arreglo y transformación de jeans<br />
+      <strong>diseñado para presentar, organizar y vender.</strong>
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     INVERSIÓN
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="blob" style="width:500px;height:500px;background:radial-gradient(circle,rgba(161,0,255,0.07) 0%,transparent 65%);top:50%;right:-150px;transform:translateY(-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Inversión<br /><span class="gradient">por página</span></h2>
+      <p class="section-sub">El valor se cotiza por página diseñada, más un cargo único por la portada. El total final depende del número de páginas de tu catálogo.</p>
+    </div>
+
+    <div class="schools-grid">
+
+      <!-- Página de catálogo -->
+      <div class="school-card">
+        <div class="school-avatar">PG</div>
+        <div class="school-name">Página de catálogo</div>
+        <div class="school-type">Diseño y diagramación</div>
+        <ul class="services-list">
+          <li><span class="check">✓</span> Diseño y diagramación profesional de cada página</li>
+          <li><span class="check">✓</span> Desarrollo y redacción de textos comerciales</li>
+          <li><span class="check">✓</span> Organización de la información suministrada</li>
+          <li><span class="check">✓</span> Edición y mejora de fotografías (luz, color, contraste, nitidez)</li>
+          <li><span class="check">✓</span> Adaptación de imágenes al diseño del catálogo</li>
+          <li><span class="check">✓</span> Unidad gráfica y estética en todo el documento</li>
+          <li><span class="check">✓</span> Entrega final en PDF digital de alta calidad</li>
+        </ul>
+        <div class="school-price">
+          <div class="price-label">Valor por página</div>
+          <div class="price-amount">$95.000</div>
+          <div class="price-currency">COP / página</div>
+        </div>
+      </div>
+
+      <!-- Portada -->
+      <div class="school-card" style="border-color:rgba(0,212,255,0.25);position:relative;">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple-lt));border-radius:20px 20px 0 0;"></div>
+        <div class="school-avatar" style="background:rgba(0,212,255,0.1);border-color:rgba(0,212,255,0.25);color:var(--cyan);">PT</div>
+        <div class="school-name">Portada</div>
+        <div class="school-type">Concepto y diseño de portada</div>
+        <ul class="services-list">
+          <li><span class="check">✓</span> Concepto visual de portada</li>
+          <li><span class="check">✓</span> Diseño de portada</li>
+          <li><span class="check">✓</span> Titular</li>
+          <li><span class="check">✓</span> Composición gráfica</li>
+        </ul>
+        <div class="school-price">
+          <div class="price-label">Valor único</div>
+          <div class="price-amount">$130.000</div>
+          <div class="price-currency">COP</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     RESUMEN ESTIMADO
+══════════════════════════════════════════ -->
+<section>
+  <div class="blob" style="width:700px;height:300px;background:radial-gradient(ellipse,rgba(161,0,255,0.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(60px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Ejemplo de<br /><span class="gradient">resumen económico</span></h2>
+      <p class="section-sub">Estimado ilustrativo para un catálogo de 10 páginas. El valor final se calcula según el número real de páginas que necesite tu catálogo.</p>
+    </div>
+
+    <div class="summary-wrap">
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>Concepto</th>
+            <th style="text-align:right">Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-name">10 páginas de catálogo (10 × $95.000)</td>
+            <td class="td-price">$950.000</td>
+          </tr>
+          <tr>
+            <td class="td-name">Portada</td>
+            <td class="td-price">$130.000</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="summary-total">
+        <span class="total-label">Total estimado</span>
+        <div>
+          <span class="total-amount">$1.080.000</span>
+          <span class="total-currency">COP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-box">
+      <span style="font-size:16px;flex-shrink:0;">ℹ️</span>
+      <p><strong>Nota:</strong> Esta tabla es solo un ejemplo con 10 páginas. Cuéntanos cuántas páginas necesitas y te confirmamos el valor exacto.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     TIEMPO DE ENTREGA Y CAMBIOS
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="blob" style="width:400px;height:400px;background:radial-gradient(circle,rgba(0,212,255,0.08) 0%,transparent 65%);bottom:-80px;right:-80px;filter:blur(60px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Tiempo de entrega<br /><span class="gradient">y cambios incluidos</span></h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="pillar-card">
+        <div class="pillar-num">⏱</div>
+        <div class="pillar-title">Tiempo de entrega</div>
+        <p class="pillar-desc">Para un catálogo de hasta 12 páginas: <strong style="color:#fff;">5 a 7 días hábiles</strong>, contados a partir de la entrega completa del material por parte del cliente. Para catálogos más extensos, el tiempo se ajusta según el número total de páginas.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">🔄</div>
+        <div class="pillar-title">Cambios incluidos</div>
+        <p class="pillar-desc">Se incluyen <strong style="color:#fff;">2 rondas de cambios</strong> después de la primera propuesta: textos, fotografías, colores, distribución de elementos e información comercial. Rehacer una página ya aprobada o cambiar por completo el concepto gráfico puede generar un costo adicional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FORMA DE PAGO
+══════════════════════════════════════════ -->
+<section>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Forma<br /><span class="gradient">de pago</span></h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="pillar-card">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">50% para iniciar</div>
+        <p class="pillar-desc">El proyecto inicia una vez recibido el anticipo y todo el material necesario por parte del cliente.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">50% contra aprobación</div>
+        <p class="pillar-desc">Se paga después de aprobar el diseño, antes de la entrega de los archivos finales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CIERRE
+══════════════════════════════════════════ -->
+<section>
+  <div class="blob" style="width:600px;height:400px;background:radial-gradient(ellipse,rgba(161,0,255,0.1) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="closing">
+      <div class="blob" style="width:400px;height:300px;background:radial-gradient(circle,rgba(161,0,255,0.1) 0%,transparent 70%);top:-100px;left:50%;transform:translateX(-50%);filter:blur(50px);"></div>
+      <p class="closing-title" style="position:relative;z-index:1;">Listos para diseñar tu catálogo</p>
+      <p class="closing-text" style="position:relative;z-index:1;">
+        Queremos ayudarte a presentar tu marca de forma <strong>profesional, ordenada y lista para vender</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONSIDERACIONES FINALES
+══════════════════════════════════════════ -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="final-note">
+      <span class="final-note-icon">⚠️</span>
+      <div>
+        <div class="final-note-title">Esta cotización no incluye:</div>
+        <ul>
+          <li>Archivos editables (AI, PSD, INDD) u otros formatos distintos al PDF final — se cotizan por separado.</li>
+          <li>Impresión física del catálogo.</li>
+          <li>Cambios que impliquen rehacer una página ya aprobada o modificar por completo el concepto gráfico, fuera de las 2 rondas incluidas.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo"><span class="logo-dot"></span>Conectux</div>
+  <p class="footer-copy">Propuesta confidencial · Viviana · conectux.com</p>
+</footer>
+
+</body>
+</html>
