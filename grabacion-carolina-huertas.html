@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propuesta Comercial – Conectux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #09090f;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    :root {
+      --purple:    #a100ff;
+      --purple-lt: #c84bff;
+      --purple-dk: #7b00cc;
+      --cyan:      #00d4ff;
+      --green:     #4ade80;
+      --muted:     rgba(160,160,184,0.85);
+      --card-bg:   rgba(255,255,255,0.05);
+      --card-border: rgba(161,0,255,0.15);
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    /* ── Navbar ─────────────────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: rgba(9,9,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 10px var(--purple);
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: 160px 48px 100px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .dot-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(161,0,255,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(161,0,255,0.1);
+      border: 1px solid rgba(161,0,255,0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--purple-lt);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); }
+    .hero-title {
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+    .gradient {
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .hero-sub strong { color: #fff; }
+
+    /* ── Sections ───────────────────────────────────────────────── */
+    section {
+      padding: 80px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    section.alt { background: #0d0d1e; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-header { margin-bottom: 48px; }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-sub { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 620px; }
+
+    /* ── Scope card ─────────────────────────────────────────────── */
+    .scope-wrap { max-width: 800px; margin: 0 auto; }
+    .scope-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 36px 32px;
+    }
+    .scope-avatar {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 900;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      margin-bottom: 18px;
+    }
+    .scope-title { font-size: 1.2rem; font-weight: 900; margin-bottom: 20px; }
+    .services-list { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; }
+    @media (max-width: 640px) { .services-list { grid-template-columns: 1fr; } }
+    .services-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(161,0,255,0.1);
+      border: 1px solid rgba(161,0,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+      color: var(--purple-lt);
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    /* ── Rate table ─────────────────────────────────────────────── */
+    .summary-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .summary-table { width: 100%; border-collapse: collapse; }
+    .summary-table thead th {
+      background: rgba(161,0,255,0.07);
+      padding: 14px 28px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+    }
+    .summary-table tbody tr { border-bottom: 1px solid rgba(161,0,255,0.07); }
+    .summary-table tbody tr:last-child { border-bottom: none; }
+    .summary-table tbody td { padding: 16px 28px; font-size: 15px; }
+    .td-name { font-weight: 700; }
+    .td-price {
+      font-weight: 900;
+      text-align: right;
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+    }
+
+    .info-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px 26px;
+      margin-top: 20px;
+    }
+    .info-card-title { font-size: 13px; font-weight: 700; color: var(--purple-lt); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .info-card p { font-size: 13.5px; color: var(--muted); line-height: 1.7; }
+    .info-card p + p { margin-top: 10px; }
+
+    /* ── Info / step cards ──────────────────────────────────────── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    @media (max-width: 860px) { .grid-2 { grid-template-columns: 1fr; } }
+    .pillar-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px 26px;
+      transition: all 0.3s ease;
+    }
+    .pillar-card:hover {
+      border-color: rgba(161,0,255,0.35);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(161,0,255,0.15);
+    }
+    .pillar-num {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 900;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      margin-bottom: 18px;
+    }
+    .pillar-title { font-size: 1.05rem; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.2px; }
+    .pillar-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+    /* ── Final note ─────────────────────────────────────────────── */
+    .final-note {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: rgba(255,200,0,0.05);
+      border: 1px solid rgba(255,200,0,0.15);
+      border-radius: 16px;
+      padding: 24px 26px;
+    }
+    .final-note-icon { font-size: 18px; flex-shrink: 0; }
+    .final-note-title { font-size: 14px; font-weight: 700; color: #e8d870; margin-bottom: 8px; }
+    .final-note ul { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 20px; }
+    @media (max-width: 640px) { .final-note ul { grid-template-columns: 1fr; } }
+    .final-note li { font-size: 13px; color: rgba(200,184,96,0.9); line-height: 1.6; padding-left: 14px; position: relative; }
+    .final-note li::before { content: '–'; position: absolute; left: 0; }
+    .final-note-footer { font-size: 12.5px; color: rgba(200,184,96,0.75); line-height: 1.6; margin-top: 14px; }
+
+    /* ── Closing ────────────────────────────────────────────────── */
+    .closing {
+      background: rgba(161,0,255,0.05);
+      border: 1px solid rgba(161,0,255,0.15);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .closing-title { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 16px; }
+    .closing-text { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 560px; margin: 0 auto 28px; }
+    .closing-text strong { color: var(--purple-lt); }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    footer {
+      background: #060610;
+      border-top: 1px solid rgba(161,0,255,0.1);
+      padding: 36px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 7px; }
+    .footer-copy { font-size: 13px; color: rgba(90,90,120,0.9); }
+
+    @media (max-width: 600px) {
+      section { padding: 60px 24px; }
+      .hero { padding: 120px 24px 80px; }
+      .navbar { padding: 0 24px; }
+      footer { padding: 28px 24px; }
+
+      .badge { font-size: 13px; }
+      .section-sub { font-size: 16px; }
+      .services-list li { font-size: 15.5px; }
+      .summary-table thead th { font-size: 12px; }
+      .summary-table tbody td { font-size: 16px; }
+      .info-card p { font-size: 14.5px; }
+      .pillar-title { font-size: 1.15rem; }
+      .pillar-desc { font-size: 15px; }
+      .closing-text { font-size: 16px; }
+      .final-note-title { font-size: 15px; }
+      .final-note li { font-size: 14.5px; }
+      .final-note-footer { font-size: 13px; }
+      .footer-copy { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar no-print">
+  <div class="logo">
+    <span class="logo-dot"></span>
+    Conectux
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<div class="hero">
+  <div class="dot-grid"></div>
+  <div class="blob" style="width:600px;height:600px;background:radial-gradient(circle,rgba(161,0,255,0.2) 0%,transparent 65%);top:-180px;left:-150px;animation:f1 10s ease-in-out infinite;"></div>
+  <div class="blob" style="width:450px;height:450px;background:radial-gradient(circle,rgba(0,212,255,0.1) 0%,transparent 65%);bottom:-120px;right:-80px;animation:f2 12s ease-in-out infinite;"></div>
+  <style>
+    @keyframes f1 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(50px,70px) scale(1.05)} }
+    @keyframes f2 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(-60px,-50px) scale(1.08)} }
+  </style>
+
+  <div class="hero-content">
+    <div class="badge"><span class="badge-dot"></span>Propuesta Comercial · Agosto 2026</div>
+    <h1 class="hero-title">
+      Grabación y Edición<br />
+      <span class="gradient">de Curso para Carolina Huertas</span>
+    </h1>
+    <p class="hero-sub">
+      Producción audiovisual profesional, de la grabación a la edición final<br />
+      <strong>lista para publicar tu curso.</strong>
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ALCANCE DEL SERVICIO
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="blob" style="width:500px;height:500px;background:radial-gradient(circle,rgba(161,0,255,0.07) 0%,transparent 65%);top:50%;right:-150px;transform:translateY(-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Alcance<br /><span class="gradient">del servicio</span></h2>
+      <p class="section-sub">Producción audiovisual de cursos: grabación profesional y edición completa del material, listo para publicar.</p>
+    </div>
+
+    <div class="scope-wrap">
+      <div class="scope-card">
+        <div class="scope-avatar">CH</div>
+        <div class="scope-title">Grabación y edición de curso audiovisual</div>
+        <ul class="services-list">
+          <li><span class="check">✓</span> Grabación profesional</li>
+          <li><span class="check">✓</span> Cámara, iluminación y audio</li>
+          <li><span class="check">✓</span> Montaje y configuración de equipos</li>
+          <li><span class="check">✓</span> Dirección básica durante la grabación</li>
+          <li><span class="check">✓</span> Edición del material</li>
+          <li><span class="check">✓</span> Eliminación de errores, pausas y repeticiones</li>
+          <li><span class="check">✓</span> Corrección básica de color</li>
+          <li><span class="check">✓</span> Optimización de audio</li>
+          <li><span class="check">✓</span> Inclusión de logo, títulos y textos básicos</li>
+          <li><span class="check">✓</span> Inserción de material gráfico suministrado por el cliente</li>
+          <li><span class="check">✓</span> Exportación del material en alta calidad</li>
+          <li><span class="check">✓</span> Hasta 2 rondas de ajustes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     TARIFAS POR HORA
+══════════════════════════════════════════ -->
+<section>
+  <div class="blob" style="width:700px;height:300px;background:radial-gradient(ellipse,rgba(161,0,255,0.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(60px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Tarifas<br /><span class="gradient">por hora</span></h2>
+      <p class="section-sub">El valor por hora disminuye según la cantidad de horas de contenido final contratadas.</p>
+    </div>
+
+    <div class="summary-wrap">
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>Horas contratadas</th>
+            <th style="text-align:right">Valor por hora</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-name">1 hora</td>
+            <td class="td-price">$500.000</td>
+          </tr>
+          <tr>
+            <td class="td-name">3 horas</td>
+            <td class="td-price">$450.000/h</td>
+          </tr>
+          <tr>
+            <td class="td-name">5 horas</td>
+            <td class="td-price">$400.000/h</td>
+          </tr>
+          <tr>
+            <td class="td-name">10 horas</td>
+            <td class="td-price">$350.000/h</td>
+          </tr>
+          <tr>
+            <td class="td-name">Más de 10 horas</td>
+            <td class="td-price">Desde $325.000/h</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-title">¿Qué comprende cada hora?</div>
+      <p>El valor corresponde a una hora final de contenido audiovisual, incluyendo tanto el proceso de grabación como la edición necesaria para entregar el material terminado.</p>
+      <p>La cantidad de tiempo requerida durante la producción y postproducción puede ser superior a la duración final del curso sin modificar el valor pactado, siempre que se encuentre dentro del alcance acordado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONDICIONES COMERCIALES
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="blob" style="width:400px;height:400px;background:radial-gradient(circle,rgba(0,212,255,0.08) 0%,transparent 65%);bottom:-80px;right:-80px;filter:blur(60px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Condiciones<br /><span class="gradient">comerciales</span></h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="pillar-card">
+        <div class="pillar-num">💳</div>
+        <div class="pillar-title">Forma de pago</div>
+        <p class="pillar-desc">50% para reservar e iniciar el proyecto. 50% previo a la entrega final.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">🔄</div>
+        <div class="pillar-title">Cambios incluidos</div>
+        <p class="pillar-desc">Se incluyen hasta 2 rondas de ajustes sobre el material entregado.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">⏱</div>
+        <div class="pillar-title">Tiempo de entrega</div>
+        <p class="pillar-desc">Se define según la cantidad de horas contratadas y el cronograma de grabación.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">📅</div>
+        <div class="pillar-title">Vigencia de la cotización</div>
+        <p class="pillar-desc">Esta cotización tiene una vigencia de 15 días calendario.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CIERRE
+══════════════════════════════════════════ -->
+<section>
+  <div class="blob" style="width:600px;height:400px;background:radial-gradient(ellipse,rgba(161,0,255,0.1) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="closing">
+      <div class="blob" style="width:400px;height:300px;background:radial-gradient(circle,rgba(161,0,255,0.1) 0%,transparent 70%);top:-100px;left:50%;transform:translateX(-50%);filter:blur(50px);"></div>
+      <p class="closing-title" style="position:relative;z-index:1;">Listos para grabar tu curso</p>
+      <p class="closing-text" style="position:relative;z-index:1;">
+        Queremos ayudarte a producir un curso <strong>profesional, bien editado y listo para publicar</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONSIDERACIONES FINALES
+══════════════════════════════════════════ -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="final-note">
+      <span class="final-note-icon">⚠️</span>
+      <div style="flex:1;">
+        <div class="final-note-title">Esta cotización no incluye:</div>
+        <ul>
+          <li>Animaciones avanzadas o motion graphics.</li>
+          <li>Creación de presentaciones o diapositivas.</li>
+          <li>Desarrollo o redacción del contenido del curso.</li>
+          <li>Teleprompter.</li>
+          <li>Alquiler de estudio o locación.</li>
+          <li>Actores o presentadores.</li>
+          <li>Desplazamientos fuera de la zona acordada.</li>
+          <li>Recursos audiovisuales que requieran licencias especiales.</li>
+          <li>Cambios estructurales posteriores a la aprobación del material.</li>
+        </ul>
+        <p class="final-note-footer">Estos servicios podrán cotizarse adicionalmente según las necesidades del proyecto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo"><span class="logo-dot"></span>Conectux</div>
+  <p class="footer-copy">Propuesta confidencial · Carolina Huertas · conectux.com</p>
+</footer>
+
+</body>
+</html>
