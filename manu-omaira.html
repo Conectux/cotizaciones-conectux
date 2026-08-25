@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propuesta Comercial – Conectux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #09090f;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    :root {
+      --purple:    #a100ff;
+      --purple-lt: #c84bff;
+      --purple-dk: #7b00cc;
+      --cyan:      #00d4ff;
+      --green:     #4ade80;
+      --muted:     rgba(160,160,184,0.85);
+      --card-bg:   rgba(255,255,255,0.05);
+      --card-border: rgba(161,0,255,0.15);
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    /* ── Navbar ─────────────────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: rgba(9,9,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 10px var(--purple);
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: 160px 48px 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .dot-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(161,0,255,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(74,222,128,0.1);
+      border: 1px solid rgba(74,222,128,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+    .hero-title {
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+    .gradient {
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .hero-sub strong { color: #fff; }
+
+    /* ── Discount banner ────────────────────────────────────────── */
+    .discount-wrap { position: relative; z-index: 1; max-width: 640px; margin: 44px auto 0; }
+    .discount-banner {
+      background: linear-gradient(180deg, rgba(74,222,128,0.08), rgba(161,0,255,0.06));
+      border: 1px solid rgba(74,222,128,0.3);
+      border-radius: 28px;
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .discount-percent {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green);
+      color: #06210f;
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      margin-bottom: 22px;
+    }
+    .discount-prices {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .discount-before {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+    .discount-arrow { font-size: 1.4rem; color: var(--muted); }
+    .discount-after {
+      font-size: clamp(2.4rem, 6vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .discount-unit { font-size: 13px; color: var(--muted); margin-top: 8px; }
+    .discount-note { font-size: 13.5px; color: var(--muted); margin-top: 18px; line-height: 1.6; }
+    .discount-note strong { color: #fff; }
+
+    /* ── Sections ───────────────────────────────────────────────── */
+    section {
+      padding: 80px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    section.alt { background: #0d0d1e; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-header { margin-bottom: 48px; }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-sub { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 620px; }
+
+    /* ── Brand cards ────────────────────────────────────────────── */
+    .schools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 760px;
+      margin: 0 auto;
+      gap: 20px;
+    }
+    @media (max-width: 860px) { .schools-grid { grid-template-columns: 1fr; } }
+
+    .school-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+    .school-card:hover {
+      border-color: rgba(161,0,255,0.35);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(161,0,255,0.15);
+    }
+    .school-avatar {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      margin-bottom: 18px;
+    }
+    .school-name { font-size: 1.15rem; font-weight: 900; margin-bottom: 4px; }
+    .school-type { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+    .services-list { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .services-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(161,0,255,0.1);
+      border: 1px solid rgba(161,0,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+      color: var(--purple-lt);
+      font-weight: 900;
+    }
+
+    /* ── Summary ────────────────────────────────────────────────── */
+    .summary-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .summary-table { width: 100%; border-collapse: collapse; }
+    .summary-table thead th {
+      background: rgba(161,0,255,0.07);
+      padding: 14px 28px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+    }
+    .summary-table tbody tr { border-bottom: 1px solid rgba(161,0,255,0.07); }
+    .summary-table tbody tr:last-child { border-bottom: none; }
+    .summary-table tbody td { padding: 16px 28px; font-size: 15px; }
+    .td-name { font-weight: 700; }
+    .td-before {
+      text-align: right;
+      color: var(--muted);
+      text-decoration: line-through;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .td-price {
+      font-weight: 900;
+      text-align: right;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+    }
+    .summary-total {
+      background: linear-gradient(90deg, rgba(74,222,128,0.12), rgba(0,212,255,0.06));
+      border-top: 1px solid rgba(74,222,128,0.25);
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .total-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+    .total-before {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: line-through;
+      margin-right: 12px;
+    }
+    .total-amount {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .total-currency { font-size: 14px; color: var(--muted); margin-left: 6px; }
+
+    /* ── Ad spend recommendation ────────────────────────────────── */
+    .adspend-wrap { max-width: 760px; margin: 0 auto; }
+    .adspend-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+    .adspend-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+      flex-wrap: wrap;
+    }
+    .adspend-row:last-of-type { border-bottom: none; }
+    .adspend-label { font-size: 14.5px; color: var(--muted); }
+    .adspend-value { font-size: 1.15rem; font-weight: 900; color: #fff; white-space: nowrap; }
+    .adspend-total {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(0,212,255,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .adspend-total-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+    .adspend-total-amount {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--cyan), var(--purple-lt));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .adspend-note { font-size: 13px; color: var(--muted); line-height: 1.65; margin-top: 20px; }
+
+    /* ── Final note ─────────────────────────────────────────────── */
+    .final-note {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: rgba(255,200,0,0.05);
+      border: 1px solid rgba(255,200,0,0.15);
+      border-radius: 16px;
+      padding: 24px 26px;
+    }
+    .final-note-icon { font-size: 18px; flex-shrink: 0; }
+    .final-note-title { font-size: 14px; font-weight: 700; color: #e8d870; margin-bottom: 8px; }
+    .final-note ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .final-note li { font-size: 13px; color: rgba(200,184,96,0.9); line-height: 1.6; padding-left: 14px; position: relative; }
+    .final-note li::before { content: '–'; position: absolute; left: 0; }
+    .final-note-footer { font-size: 12.5px; color: rgba(200,184,96,0.75); line-height: 1.6; margin-top: 14px; }
+
+    /* ── Closing ────────────────────────────────────────────────── */
+    .closing {
+      background: rgba(74,222,128,0.06);
+      border: 1px solid rgba(74,222,128,0.2);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .closing-title { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 16px; }
+    .closing-text { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 560px; margin: 0 auto 28px; }
+    .closing-text strong { color: var(--green); }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    footer {
+      background: #060610;
+      border-top: 1px solid rgba(161,0,255,0.1);
+      padding: 36px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 7px; }
+    .footer-copy { font-size: 13px; color: rgba(90,90,120,0.9); }
+
+    @media (max-width: 600px) {
+      section { padding: 60px 24px; }
+      .hero { padding: 120px 24px 60px; }
+      .navbar { padding: 0 24px; }
+      footer { padding: 28px 24px; }
+
+      .badge { font-size: 13px; }
+      .section-sub { font-size: 16px; }
+      .discount-banner { padding: 32px 22px; }
+      .discount-before { font-size: 1.3rem; }
+      .discount-note { font-size: 14.5px; }
+      .school-type { font-size: 14px; }
+      .services-list li { font-size: 15.5px; }
+      .summary-table thead th { font-size: 12px; }
+      .summary-table tbody td { font-size: 16px; }
+      .total-label { font-size: 14px; }
+      .total-currency { font-size: 15px; }
+      .adspend-label { font-size: 15.5px; }
+      .adspend-value { font-size: 1.25rem; }
+      .adspend-note { font-size: 14px; }
+      .closing-text { font-size: 16px; }
+      .final-note-title { font-size: 15px; }
+      .final-note li { font-size: 14.5px; }
+      .final-note-footer { font-size: 13px; }
+      .footer-copy { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar no-print">
+  <div class="logo">
+    <span class="logo-dot"></span>
+    Conectux
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO + DESCUENTO
+══════════════════════════════════════════ -->
+<div class="hero">
+  <div class="dot-grid"></div>
+  <div class="blob" style="width:600px;height:600px;background:radial-gradient(circle,rgba(74,222,128,0.15) 0%,transparent 65%);top:-180px;left:-150px;animation:f1 10s ease-in-out infinite;"></div>
+  <div class="blob" style="width:450px;height:450px;background:radial-gradient(circle,rgba(0,212,255,0.1) 0%,transparent 65%);bottom:-120px;right:-80px;animation:f2 12s ease-in-out infinite;"></div>
+  <style>
+    @keyframes f1 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(50px,70px) scale(1.05)} }
+    @keyframes f2 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(-60px,-50px) scale(1.08)} }
+  </style>
+
+  <div class="hero-content">
+    <div class="badge"><span class="badge-dot"></span>🔥 Oferta especial · 2 marcas en 1</div>
+    <h1 class="hero-title">
+      Marketing Digital<br />
+      <span class="gradient">para Manu y Omaira</span>
+    </h1>
+    <p class="hero-sub">
+      Gestionamos el marketing digital de tus dos marcas<br />
+      <strong>Hogar y Moda Femenina, con una sola inversión mensual.</strong>
+    </p>
+  </div>
+
+  <div class="discount-wrap">
+    <div class="discount-banner">
+      <span class="discount-percent">⚡ -53% DE DESCUENTO</span>
+      <div class="discount-prices">
+        <span class="discount-before">$3.000.000</span>
+        <span class="discount-arrow">→</span>
+        <span class="discount-after">$1.400.000</span>
+      </div>
+      <div class="discount-unit">COP / mes · las dos marcas incluidas</div>
+      <p class="discount-note">Este es un precio de <strong>lanzamiento especial</strong> por manejar ambas marcas juntas. Nunca habíamos ofrecido un descuento así.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PLAN MENSUAL POR MARCA
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="blob" style="width:500px;height:500px;background:radial-gradient(circle,rgba(161,0,255,0.07) 0%,transparent 65%);top:50%;right:-150px;transform:translateY(-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Lo mismo<br /><span class="gradient">para cada marca</span></h2>
+      <p class="section-sub">Contenido y pauta administrada de forma independiente para cada marca, sin bajarle el nivel a ninguna de las dos.</p>
+    </div>
+
+    <div class="schools-grid">
+
+      <!-- Marca de Hogar -->
+      <div class="school-card">
+        <div class="school-avatar">MH</div>
+        <div class="school-name">Marca de Hogar</div>
+        <div class="school-type">Contenido + Pauta Digital</div>
+        <ul class="services-list">
+          <li><span class="check">✓</span> 4 posts al mes</li>
+          <li><span class="check">✓</span> 4 videos al mes</li>
+          <li><span class="check">✓</span> Instagram, Facebook y TikTok</li>
+          <li><span class="check">✓</span> Administración de pauta digital</li>
+        </ul>
+      </div>
+
+      <!-- Marca de Moda Femenina -->
+      <div class="school-card" style="border-color:rgba(0,212,255,0.25);position:relative;">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple-lt));border-radius:20px 20px 0 0;"></div>
+        <div class="school-avatar" style="background:rgba(0,212,255,0.1);border-color:rgba(0,212,255,0.25);color:var(--cyan);">MF</div>
+        <div class="school-name">Marca de Moda Femenina</div>
+        <div class="school-type">Contenido + Pauta Digital</div>
+        <ul class="services-list">
+          <li><span class="check">✓</span> 4 posts al mes</li>
+          <li><span class="check">✓</span> 4 videos al mes</li>
+          <li><span class="check">✓</span> Instagram, Facebook y TikTok</li>
+          <li><span class="check">✓</span> Administración de pauta digital</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     RESUMEN ECONÓMICO
+══════════════════════════════════════════ -->
+<section>
+  <div class="blob" style="width:700px;height:300px;background:radial-gradient(ellipse,rgba(74,222,128,0.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(60px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Resumen<br /><span class="gradient">económico</span></h2>
+    </div>
+
+    <div class="summary-wrap">
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>Marca</th>
+            <th style="text-align:right">Valor individual</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-name">Marca de Hogar</td>
+            <td class="td-before">$1.500.000</td>
+          </tr>
+          <tr>
+            <td class="td-name">Marca de Moda Femenina</td>
+            <td class="td-before">$1.500.000</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="summary-total">
+        <span class="total-label">Total mensual · ambas marcas</span>
+        <div>
+          <span class="total-before">$3.000.000</span>
+          <span class="total-amount">$1.400.000</span>
+          <span class="total-currency">COP / mes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     INVERSIÓN EN PAUTA DIGITAL
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="blob" style="width:400px;height:400px;background:radial-gradient(circle,rgba(0,212,255,0.08) 0%,transparent 65%);bottom:-80px;right:-80px;filter:blur(60px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Inversión recomendada<br /><span class="gradient">en pauta digital</span></h2>
+      <p class="section-sub">Administramos la pauta, pero el presupuesto de anuncios se paga directamente a las plataformas (Meta, TikTok), por separado de nuestro servicio.</p>
+    </div>
+
+    <div class="adspend-wrap">
+      <div class="adspend-card">
+        <div class="adspend-row">
+          <span class="adspend-label">Marca de Hogar</span>
+          <span class="adspend-value">$600.000 COP / mes</span>
+        </div>
+        <div class="adspend-row">
+          <span class="adspend-label">Marca de Moda Femenina</span>
+          <span class="adspend-value">$600.000 COP / mes</span>
+        </div>
+        <div class="adspend-total">
+          <span class="adspend-total-label">Total recomendado · ambas marcas</span>
+          <span class="adspend-total-amount">$1.200.000 COP / mes</span>
+        </div>
+        <p class="adspend-note">Esta inversión la pagan directamente ustedes a las plataformas publicitarias (no a Conectux) y es la que recomendamos para obtener resultados visibles. Se puede ajustar el monto según presupuesto disponible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CIERRE
+══════════════════════════════════════════ -->
+<section>
+  <div class="blob" style="width:600px;height:400px;background:radial-gradient(ellipse,rgba(74,222,128,0.1) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="closing">
+      <div class="blob" style="width:400px;height:300px;background:radial-gradient(circle,rgba(74,222,128,0.12) 0%,transparent 70%);top:-100px;left:50%;transform:translateX(-50%);filter:blur(50px);"></div>
+      <p class="closing-title" style="position:relative;z-index:1;">Dos marcas, un solo aliado digital</p>
+      <p class="closing-text" style="position:relative;z-index:1;">
+        Aprovechen esta oferta especial y hagan crecer <strong>ambas marcas al mismo tiempo</strong>, mes a mes.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONSIDERACIONES FINALES
+══════════════════════════════════════════ -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="final-note">
+      <span class="final-note-icon">⚠️</span>
+      <div>
+        <div class="final-note-title">Esta cotización no incluye:</div>
+        <ul>
+          <li>La inversión en pauta digital ($600.000 COP/mes recomendado por marca) — se paga directamente a las plataformas, por separado de este valor.</li>
+          <li>Diseño y desarrollo de página web u otras piezas fuera de lo listado en el plan.</li>
+          <li>Costos de producción adicionales no contemplados en la sesión de contenido mensual (actores, locaciones especiales, licencias de música, etc.).</li>
+        </ul>
+        <p class="final-note-footer">Precio especial de $1.400.000 COP/mes válido por 15 días calendario a partir de esta propuesta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo"><span class="logo-dot"></span>Conectux</div>
+  <p class="footer-copy">Propuesta confidencial · Manu y Omaira · conectux.com</p>
+</footer>
+
+</body>
+</html>
