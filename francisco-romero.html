@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propuesta Comercial – Conectux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #09090f;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    :root {
+      --purple:    #a100ff;
+      --purple-lt: #c84bff;
+      --purple-dk: #7b00cc;
+      --cyan:      #00d4ff;
+      --green:     #4ade80;
+      --muted:     rgba(160,160,184,0.85);
+      --card-bg:   rgba(255,255,255,0.05);
+      --card-border: rgba(161,0,255,0.15);
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    /* ── Navbar ─────────────────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: rgba(9,9,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 10px var(--purple);
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: 160px 48px 100px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .dot-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(161,0,255,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(161,0,255,0.1);
+      border: 1px solid rgba(161,0,255,0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--purple-lt);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); }
+    .hero-title {
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+    .gradient {
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .hero-sub strong { color: #fff; }
+
+    /* ── Sections ───────────────────────────────────────────────── */
+    section {
+      padding: 80px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    section.alt { background: #0d0d1e; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-header { margin-bottom: 48px; }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-sub { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 620px; }
+
+    /* ── Scope card ─────────────────────────────────────────────── */
+    .scope-wrap { max-width: 800px; margin: 0 auto; }
+    .scope-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 36px 32px;
+    }
+    .scope-avatar {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 900;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      margin-bottom: 18px;
+    }
+    .scope-title { font-size: 1.2rem; font-weight: 900; margin-bottom: 20px; }
+    .checklist { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; }
+    @media (max-width: 640px) { .checklist { grid-template-columns: 1fr; } }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(161,0,255,0.1);
+      border: 1px solid rgba(161,0,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+      color: var(--purple-lt);
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    /* ── Plan cards ─────────────────────────────────────────────── */
+    .schools-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 860px) { .schools-grid { grid-template-columns: 1fr; } }
+
+    .school-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+    .school-card:hover {
+      border-color: rgba(161,0,255,0.35);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(161,0,255,0.15);
+    }
+    .school-avatar {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      font-weight: 900;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      margin-bottom: 18px;
+    }
+    .school-name { font-size: 1.2rem; font-weight: 900; margin-bottom: 4px; }
+    .school-type { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+    .services-list { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .services-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .plan-badge {
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--purple), var(--purple-lt));
+      border-radius: 20px 20px 0 0;
+    }
+    .plan-tag {
+      position: absolute;
+      top: -12px; right: 20px;
+      background: linear-gradient(135deg, var(--purple), var(--purple-dk));
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      box-shadow: 0 4px 14px rgba(161,0,255,0.4);
+    }
+    .school-price {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(161,0,255,0.1);
+    }
+    .price-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .price-amount {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .price-currency { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .price-total { font-size: 13px; color: var(--muted); margin-top: 14px; padding-top: 14px; border-top: 1px dashed rgba(161,0,255,0.15); }
+    .price-total strong { color: #fff; font-weight: 900; }
+
+    /* ── Summary ────────────────────────────────────────────────── */
+    .summary-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .summary-table { width: 100%; border-collapse: collapse; }
+    .summary-table thead th {
+      background: rgba(161,0,255,0.07);
+      padding: 14px 28px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+    }
+    .summary-table tbody tr { border-bottom: 1px solid rgba(161,0,255,0.07); }
+    .summary-table tbody tr:last-child { border-bottom: none; }
+    .summary-table tbody td { padding: 16px 28px; font-size: 15px; }
+    .td-name { font-weight: 700; }
+    .td-price {
+      font-weight: 900;
+      text-align: right;
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+    }
+    .td-mid { text-align: right; color: var(--muted); font-size: 14px; white-space: nowrap; }
+
+    /* ── Info / step cards ──────────────────────────────────────── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    @media (max-width: 860px) { .grid-2 { grid-template-columns: 1fr; } }
+    .pillar-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px 26px;
+      transition: all 0.3s ease;
+    }
+    .pillar-card:hover {
+      border-color: rgba(161,0,255,0.35);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(161,0,255,0.15);
+    }
+    .pillar-num {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 900;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      margin-bottom: 18px;
+    }
+    .pillar-title { font-size: 1.05rem; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.2px; }
+    .pillar-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+    /* ── Final note ─────────────────────────────────────────────── */
+    .final-note {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: rgba(255,200,0,0.05);
+      border: 1px solid rgba(255,200,0,0.15);
+      border-radius: 16px;
+      padding: 24px 26px;
+    }
+    .final-note-icon { font-size: 18px; flex-shrink: 0; }
+    .final-note-title { font-size: 14px; font-weight: 700; color: #e8d870; margin-bottom: 8px; }
+    .final-note ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .final-note li { font-size: 13px; color: rgba(200,184,96,0.9); line-height: 1.6; padding-left: 14px; position: relative; }
+    .final-note li::before { content: '–'; position: absolute; left: 0; }
+    .final-note-footer { font-size: 12.5px; color: rgba(200,184,96,0.75); line-height: 1.6; margin-top: 14px; }
+
+    /* ── Closing ────────────────────────────────────────────────── */
+    .closing {
+      background: rgba(161,0,255,0.05);
+      border: 1px solid rgba(161,0,255,0.15);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .closing-title { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 16px; }
+    .closing-text { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 560px; margin: 0 auto 28px; }
+    .closing-text strong { color: var(--purple-lt); }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    footer {
+      background: #060610;
+      border-top: 1px solid rgba(161,0,255,0.1);
+      padding: 36px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 7px; }
+    .footer-copy { font-size: 13px; color: rgba(90,90,120,0.9); }
+
+    @media (max-width: 600px) {
+      section { padding: 60px 24px; }
+      .hero { padding: 120px 24px 80px; }
+      .navbar { padding: 0 24px; }
+      footer { padding: 28px 24px; }
+
+      .badge { font-size: 13px; }
+      .section-sub { font-size: 16px; }
+      .checklist li { font-size: 15.5px; }
+      .school-type { font-size: 14px; }
+      .services-list li { font-size: 15.5px; }
+      .price-label { font-size: 12px; }
+      .price-currency { font-size: 13px; }
+      .price-total { font-size: 14.5px; }
+      .summary-table thead th { font-size: 12px; }
+      .summary-table tbody td { font-size: 16px; }
+      .pillar-title { font-size: 1.15rem; }
+      .pillar-desc { font-size: 15px; }
+      .closing-text { font-size: 16px; }
+      .final-note-title { font-size: 15px; }
+      .final-note li { font-size: 14.5px; }
+      .final-note-footer { font-size: 13px; }
+      .footer-copy { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar no-print">
+  <div class="logo">
+    <span class="logo-dot"></span>
+    Conectux
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<div class="hero">
+  <div class="dot-grid"></div>
+  <div class="blob" style="width:600px;height:600px;background:radial-gradient(circle,rgba(161,0,255,0.2) 0%,transparent 65%);top:-180px;left:-150px;animation:f1 10s ease-in-out infinite;"></div>
+  <div class="blob" style="width:450px;height:450px;background:radial-gradient(circle,rgba(0,212,255,0.1) 0%,transparent 65%);bottom:-120px;right:-80px;animation:f2 12s ease-in-out infinite;"></div>
+  <style>
+    @keyframes f1 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(50px,70px) scale(1.05)} }
+    @keyframes f2 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(-60px,-50px) scale(1.08)} }
+  </style>
+
+  <div class="hero-content">
+    <div class="badge"><span class="badge-dot"></span>Propuesta Comercial · Agosto 2026</div>
+    <h1 class="hero-title">
+      Edición de Videos<br />
+      <span class="gradient">para Francisco Romero</span>
+    </h1>
+    <p class="hero-sub">
+      Contenido editado para tu estudio de cejas y maquillaje<br />
+      <strong>listo para publicar cada mes en redes sociales.</strong>
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     QUÉ INCLUYE CADA EDICIÓN
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="blob" style="width:500px;height:500px;background:radial-gradient(circle,rgba(161,0,255,0.07) 0%,transparent 65%);top:50%;right:-150px;transform:translateY(-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Qué incluye<br /><span class="gradient">cada edición</span></h2>
+      <p class="section-sub">Tú grabas con tu celular o cámara, nosotros lo convertimos en contenido profesional listo para publicar.</p>
+    </div>
+
+    <div class="scope-wrap">
+      <div class="scope-card">
+        <div class="scope-avatar">FR</div>
+        <div class="scope-title">Edición de video para redes sociales</div>
+        <ul class="checklist">
+          <li><span class="check">✓</span> Edición y corte del material grabado</li>
+          <li><span class="check">✓</span> Eliminación de errores, pausas y repeticiones</li>
+          <li><span class="check">✓</span> Corrección básica de color</li>
+          <li><span class="check">✓</span> Optimización y limpieza de audio</li>
+          <li><span class="check">✓</span> Subtítulos o textos en pantalla</li>
+          <li><span class="check">✓</span> Inclusión de logo y elementos de marca</li>
+          <li><span class="check">✓</span> Formato vertical optimizado para Reels, TikTok e Instagram</li>
+          <li><span class="check">✓</span> Exportación en alta calidad</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PLANES MENSUALES
+══════════════════════════════════════════ -->
+<section>
+  <div class="blob" style="width:500px;height:400px;background:radial-gradient(ellipse,rgba(161,0,255,0.08) 0%,transparent 70%);top:-100px;right:-100px;filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Planes<br /><span class="gradient">mensuales</span></h2>
+      <p class="section-sub">Entre más videos edites al mes, más económico sale cada uno. Elige el plan que mejor se ajuste al ritmo de contenido de tu estudio.</p>
+    </div>
+
+    <div class="schools-grid">
+
+      <!-- 4 videos -->
+      <div class="school-card">
+        <div class="school-avatar">4</div>
+        <div class="school-name">4 videos al mes</div>
+        <div class="school-type">Edición profesional</div>
+        <div class="school-price">
+          <div class="price-label">Valor por video</div>
+          <div class="price-amount">$180.000</div>
+          <div class="price-currency">COP c/u</div>
+          <div class="price-total">Total mensual: <strong>$720.000 COP</strong></div>
+        </div>
+      </div>
+
+      <!-- 8 videos -->
+      <div class="school-card" style="border-color:rgba(161,0,255,0.25);position:relative;">
+        <div class="plan-badge"></div>
+        <span class="plan-tag">Más popular</span>
+        <div class="school-avatar" style="background:rgba(200,75,255,0.12);border-color:rgba(200,75,255,0.3);color:var(--purple-lt);">8</div>
+        <div class="school-name">8 videos al mes</div>
+        <div class="school-type">Edición profesional</div>
+        <div class="school-price">
+          <div class="price-label">Valor por video</div>
+          <div class="price-amount">$150.000</div>
+          <div class="price-currency">COP c/u</div>
+          <div class="price-total">Total mensual: <strong>$1.200.000 COP</strong></div>
+        </div>
+      </div>
+
+      <!-- 12 videos -->
+      <div class="school-card">
+        <div class="school-avatar" style="background:rgba(0,212,255,0.1);border-color:rgba(0,212,255,0.25);color:var(--cyan);">12</div>
+        <div class="school-name">12 videos al mes</div>
+        <div class="school-type">Edición profesional</div>
+        <div class="school-price">
+          <div class="price-label">Valor por video</div>
+          <div class="price-amount">$120.000</div>
+          <div class="price-currency">COP c/u</div>
+          <div class="price-total">Total mensual: <strong>$1.440.000 COP</strong></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     RESUMEN ECONÓMICO
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="blob" style="width:700px;height:300px;background:radial-gradient(ellipse,rgba(161,0,255,0.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(60px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Comparativo<br /><span class="gradient">de planes</span></h2>
+    </div>
+
+    <div class="summary-wrap">
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th style="text-align:right">Precio por video</th>
+            <th style="text-align:right">Total mensual</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-name">4 videos al mes</td>
+            <td class="td-mid">$180.000</td>
+            <td class="td-price">$720.000</td>
+          </tr>
+          <tr>
+            <td class="td-name">8 videos al mes</td>
+            <td class="td-mid">$150.000</td>
+            <td class="td-price">$1.200.000</td>
+          </tr>
+          <tr>
+            <td class="td-name">12 videos al mes</td>
+            <td class="td-mid">$120.000</td>
+            <td class="td-price">$1.440.000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     TIEMPO DE ENTREGA Y CAMBIOS
+══════════════════════════════════════════ -->
+<section>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Tiempo de entrega<br /><span class="gradient">y cambios incluidos</span></h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="pillar-card">
+        <div class="pillar-num">⏱</div>
+        <div class="pillar-title">Tiempo de entrega</div>
+        <p class="pillar-desc">Cada video se entrega editado en un máximo de <strong style="color:#fff;">3 a 5 días hábiles</strong> después de recibir el material grabado por parte del cliente.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">🔄</div>
+        <div class="pillar-title">Cambios incluidos</div>
+        <p class="pillar-desc">Se incluye <strong style="color:#fff;">1 ronda de ajustes</strong> por video (cortes, textos, música, ritmo). Solicitudes fuera de este alcance pueden generar un costo adicional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CIERRE
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="blob" style="width:600px;height:400px;background:radial-gradient(ellipse,rgba(161,0,255,0.1) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="closing">
+      <div class="blob" style="width:400px;height:300px;background:radial-gradient(circle,rgba(161,0,255,0.1) 0%,transparent 70%);top:-100px;left:50%;transform:translateX(-50%);filter:blur(50px);"></div>
+      <p class="closing-title" style="position:relative;z-index:1;">Listos para editar tu contenido</p>
+      <p class="closing-text" style="position:relative;z-index:1;">
+        Queremos ayudarte a mostrar tu trabajo con <strong>videos profesionales, mes a mes</strong>, sin que tengas que preocuparte por la edición.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONSIDERACIONES FINALES
+══════════════════════════════════════════ -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="final-note">
+      <span class="final-note-icon">⚠️</span>
+      <div>
+        <div class="final-note-title">Esta cotización no incluye:</div>
+        <ul>
+          <li>Grabación del video — este servicio es solo de edición; el material debe ser grabado por el cliente o cotizado aparte.</li>
+          <li>Guion, dirección de grabación o producción en set.</li>
+          <li>Animaciones avanzadas o motion graphics.</li>
+          <li>Pauta digital o administración de redes sociales.</li>
+        </ul>
+        <p class="final-note-footer">Los planes se facturan mensualmente y los videos no usados en un mes no se acumulan para el siguiente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo"><span class="logo-dot"></span>Conectux</div>
+  <p class="footer-copy">Propuesta confidencial · Francisco Romero · conectux.com</p>
+</footer>
+
+</body>
+</html>
