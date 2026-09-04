@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propuesta Comercial – Conectux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #09090f;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    :root {
+      --purple:    #a100ff;
+      --purple-lt: #c84bff;
+      --purple-dk: #7b00cc;
+      --cyan:      #00d4ff;
+      --green:     #4ade80;
+      --muted:     rgba(160,160,184,0.85);
+      --card-bg:   rgba(255,255,255,0.05);
+      --card-border: rgba(161,0,255,0.15);
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    /* ── Navbar ─────────────────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: rgba(9,9,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 10px var(--purple);
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: 160px 48px 100px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .dot-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(161,0,255,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(161,0,255,0.1);
+      border: 1px solid rgba(161,0,255,0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--purple-lt);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); }
+    .hero-title {
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+    .gradient {
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .hero-sub strong { color: #fff; }
+
+    /* ── Sections ───────────────────────────────────────────────── */
+    section {
+      padding: 80px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    section.alt { background: #0d0d1e; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-header { margin-bottom: 48px; }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-sub { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 620px; }
+
+    /* ── Plan / scope card ──────────────────────────────────────── */
+    .scope-wrap { max-width: 640px; margin: 0 auto; }
+    .scope-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 36px 32px;
+    }
+    .scope-avatar {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 900;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      margin-bottom: 18px;
+    }
+    .scope-title { font-size: 1.2rem; font-weight: 900; margin-bottom: 20px; }
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .check {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(161,0,255,0.1);
+      border: 1px solid rgba(161,0,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      color: var(--purple-lt);
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    /* ── Mode cards ─────────────────────────────────────────────── */
+    .schools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 800px;
+      margin: 0 auto;
+      gap: 20px;
+    }
+    @media (max-width: 760px) { .schools-grid { grid-template-columns: 1fr; } }
+
+    .school-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+    .school-card:hover {
+      border-color: rgba(161,0,255,0.35);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(161,0,255,0.15);
+    }
+    .school-avatar {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 900;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      margin-bottom: 18px;
+    }
+    .school-name { font-size: 1.15rem; font-weight: 900; margin-bottom: 4px; }
+    .school-type { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+    .school-desc { font-size: 13.5px; color: var(--muted); line-height: 1.6; flex: 1; }
+    .school-price {
+      margin-top: 24px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(161,0,255,0.1);
+    }
+    .price-before { font-size: 14px; font-weight: 700; color: var(--muted); text-decoration: line-through; margin-bottom: 6px; }
+    .price-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 4px; }
+    .price-amount {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .price-currency { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Discount breakdown ─────────────────────────────────────── */
+    .discount-explain { max-width: 760px; margin: 0 auto; }
+    .discount-card {
+      background: rgba(74,222,128,0.05);
+      border: 1px solid rgba(74,222,128,0.2);
+      border-radius: 20px;
+      padding: 32px;
+    }
+    .discount-card-title { font-size: 1.05rem; font-weight: 900; color: var(--green); margin-bottom: 12px; }
+    .discount-card p { font-size: 14px; color: var(--muted); line-height: 1.75; }
+    .discount-card p + p { margin-top: 12px; }
+    .discount-card strong { color: #fff; }
+
+    .breakdown-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+    .breakdown-table th {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: right;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(74,222,128,0.2);
+    }
+    .breakdown-table th:first-child { text-align: left; }
+    .breakdown-table td { padding: 12px 0; font-size: 14.5px; text-align: right; border-bottom: 1px solid rgba(74,222,128,0.1); }
+    .breakdown-table td:first-child { text-align: left; color: var(--muted); }
+    .breakdown-table tr:last-child td { border-bottom: none; font-weight: 900; font-size: 16px; color: var(--green); padding-top: 16px; }
+    .breakdown-neg { color: #ff8a8a; }
+
+    /* ── Final note ─────────────────────────────────────────────── */
+    .final-note {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: rgba(255,200,0,0.05);
+      border: 1px solid rgba(255,200,0,0.15);
+      border-radius: 16px;
+      padding: 24px 26px;
+    }
+    .final-note-icon { font-size: 18px; flex-shrink: 0; }
+    .final-note-title { font-size: 14px; font-weight: 700; color: #e8d870; margin-bottom: 8px; }
+    .final-note ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .final-note li { font-size: 13px; color: rgba(200,184,96,0.9); line-height: 1.6; padding-left: 14px; position: relative; }
+    .final-note li::before { content: '–'; position: absolute; left: 0; }
+
+    /* ── Closing ────────────────────────────────────────────────── */
+    .closing {
+      background: rgba(161,0,255,0.05);
+      border: 1px solid rgba(161,0,255,0.15);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .closing-title { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 16px; }
+    .closing-text { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 560px; margin: 0 auto 28px; }
+    .closing-text strong { color: var(--purple-lt); }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    footer {
+      background: #060610;
+      border-top: 1px solid rgba(161,0,255,0.1);
+      padding: 36px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 7px; }
+    .footer-copy { font-size: 13px; color: rgba(90,90,120,0.9); }
+
+    @media (max-width: 600px) {
+      section { padding: 60px 24px; }
+      .hero { padding: 120px 24px 80px; }
+      .navbar { padding: 0 24px; }
+      footer { padding: 28px 24px; }
+
+      .badge { font-size: 13px; }
+      .section-sub { font-size: 16px; }
+      .checklist li { font-size: 16px; }
+      .school-type { font-size: 14px; }
+      .school-desc { font-size: 14.5px; }
+      .price-currency { font-size: 13px; }
+      .discount-card p { font-size: 15px; }
+      .breakdown-table td, .breakdown-table th { font-size: 15px; }
+      .closing-text { font-size: 16px; }
+      .final-note-title { font-size: 15px; }
+      .final-note li { font-size: 14.5px; }
+      .footer-copy { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar no-print">
+  <div class="logo">
+    <span class="logo-dot"></span>
+    Conectux
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<div class="hero">
+  <div class="dot-grid"></div>
+  <div class="blob" style="width:600px;height:600px;background:radial-gradient(circle,rgba(161,0,255,0.2) 0%,transparent 65%);top:-180px;left:-150px;animation:f1 10s ease-in-out infinite;"></div>
+  <div class="blob" style="width:450px;height:450px;background:radial-gradient(circle,rgba(0,212,255,0.1) 0%,transparent 65%);bottom:-120px;right:-80px;animation:f2 12s ease-in-out infinite;"></div>
+  <style>
+    @keyframes f1 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(50px,70px) scale(1.05)} }
+    @keyframes f2 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(-60px,-50px) scale(1.08)} }
+  </style>
+
+  <div class="hero-content">
+    <div class="badge"><span class="badge-dot"></span>Propuesta Comercial · Agosto 2026</div>
+    <h1 class="hero-title">
+      Plan de Marketing Digital<br />
+      <span class="gradient">para Triburoll</span>
+    </h1>
+    <p class="hero-sub">
+      Estrategia, contenido y pauta digital<br />
+      <strong>para atraer más familias a Triburoll, mes a mes.</strong>
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PLAN MENSUAL
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="blob" style="width:500px;height:500px;background:radial-gradient(circle,rgba(161,0,255,0.07) 0%,transparent 65%);top:50%;right:-150px;transform:translateY(-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Qué incluye<br /><span class="gradient">el plan mensual</span></h2>
+      <p class="section-sub">El mismo plan de contenido y pauta, sin importar la modalidad de pago que elijan.</p>
+    </div>
+
+    <div class="scope-wrap">
+      <div class="scope-card">
+        <div class="scope-avatar">TR</div>
+        <div class="scope-title">Marketing digital mensual</div>
+        <ul class="checklist">
+          <li><span class="check">✓</span> Estrategia de marketing</li>
+          <li><span class="check">✓</span> Grabación de contenido 1 vez al mes</li>
+          <li><span class="check">✓</span> 4 videos al mes</li>
+          <li><span class="check">✓</span> 4 posts al mes</li>
+          <li><span class="check">✓</span> Administración de pauta digital</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     MODALIDADES
+══════════════════════════════════════════ -->
+<section>
+  <div class="blob" style="width:500px;height:400px;background:radial-gradient(ellipse,rgba(161,0,255,0.08) 0%,transparent 70%);top:-100px;right:-100px;filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Elige tu<br /><span class="gradient">modalidad de pago</span></h2>
+      <p class="section-sub">Dos formas de trabajar juntos: una tarifa fija, o una tarifa más baja complementada con comisión sobre resultados.</p>
+    </div>
+
+    <div class="schools-grid">
+
+      <!-- Modo A -->
+      <div class="school-card">
+        <div class="school-avatar">A</div>
+        <div class="school-name">Modo A · Precio Full</div>
+        <div class="school-type">Tarifa fija mensual</div>
+        <p class="school-desc">Un solo pago mensual fijo. Sin comisiones adicionales sobre ventas o resultados.</p>
+        <div class="school-price">
+          <div class="price-before">$1.500.000</div>
+          <div class="price-label">Precio con descuento por alianza</div>
+          <div class="price-amount">$1.300.000</div>
+          <div class="price-currency">COP / mes</div>
+        </div>
+      </div>
+
+      <!-- Modo B -->
+      <div class="school-card" style="border-color:rgba(0,212,255,0.25);position:relative;">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple-lt));border-radius:20px 20px 0 0;"></div>
+        <div class="school-avatar" style="background:rgba(0,212,255,0.1);border-color:rgba(0,212,255,0.25);color:var(--cyan);">B</div>
+        <div class="school-name">Modo B · Precio con Comisión</div>
+        <div class="school-type">Tarifa reducida + comisión por resultados</div>
+        <p class="school-desc">Tarifa mensual más baja, complementada con una comisión sobre resultados/ventas que se pacta por separado.</p>
+        <div class="school-price">
+          <div class="price-before">$700.000</div>
+          <div class="price-label">Precio con descuento por alianza</div>
+          <div class="price-amount">$500.000</div>
+          <div class="price-currency">COP / mes + comisión a pactar</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     DE DÓNDE VIENE EL DESCUENTO
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="blob" style="width:400px;height:400px;background:radial-gradient(circle,rgba(74,222,128,0.08) 0%,transparent 65%);bottom:-80px;right:-80px;filter:blur(60px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">¿De dónde viene<br /><span class="gradient">el descuento?</span></h2>
+    </div>
+
+    <div class="discount-explain">
+      <div class="discount-card">
+        <div class="discount-card-title">Descuento por alianza de entrenamiento</div>
+        <p>Quien lidera este proyecto de marketing entrena en Triburoll y paga una mensualidad de <strong>$180.000 COP</strong>.</p>
+        <p>Como parte de esta alianza, Triburoll aplica un descuento de <strong>$200.000 COP mensuales</strong> sobre el plan de marketing — un valor que cubre esa mensualidad de entrenamiento y deja además un pequeño beneficio adicional para Triburoll frente al costo real del servicio.</p>
+
+        <table class="breakdown-table">
+          <thead>
+            <tr>
+              <th>Concepto</th>
+              <th>Modo A</th>
+              <th>Modo B</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Precio regular</td>
+              <td>$1.500.000</td>
+              <td>$700.000</td>
+            </tr>
+            <tr>
+              <td>Descuento por alianza</td>
+              <td class="breakdown-neg">–$200.000</td>
+              <td class="breakdown-neg">–$200.000</td>
+            </tr>
+            <tr>
+              <td>Precio final</td>
+              <td>$1.300.000</td>
+              <td>$500.000 + comisión</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CIERRE
+══════════════════════════════════════════ -->
+<section>
+  <div class="blob" style="width:600px;height:400px;background:radial-gradient(ellipse,rgba(161,0,255,0.1) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="closing">
+      <div class="blob" style="width:400px;height:300px;background:radial-gradient(circle,rgba(161,0,255,0.1) 0%,transparent 70%);top:-100px;left:50%;transform:translateX(-50%);filter:blur(50px);"></div>
+      <p class="closing-title" style="position:relative;z-index:1;">Crezcamos juntos</p>
+      <p class="closing-text" style="position:relative;z-index:1;">
+        Queremos ayudar a que <strong>más familias conozcan y visiten Triburoll</strong>, mes a mes.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONSIDERACIONES FINALES
+══════════════════════════════════════════ -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="final-note">
+      <span class="final-note-icon">⚠️</span>
+      <div>
+        <div class="final-note-title">Esta cotización no incluye:</div>
+        <ul>
+          <li>La inversión en pauta digital (Meta Ads, TikTok Ads) — se define y paga por separado.</li>
+          <li>El porcentaje de comisión del Modo B — se pacta en un acuerdo aparte.</li>
+          <li>Diseño y desarrollo de página web u otros servicios fuera de lo listado en el plan.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo"><span class="logo-dot"></span>Conectux</div>
+  <p class="footer-copy">Propuesta confidencial · Triburoll · conectux.com</p>
+</footer>
+
+</body>
+</html>
