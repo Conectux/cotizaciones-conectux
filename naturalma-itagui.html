@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propuesta Comercial – Conectux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #09090f;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      font-size: 18px;
+    }
+    :root {
+      --purple:    #a100ff;
+      --purple-lt: #c84bff;
+      --purple-dk: #7b00cc;
+      --cyan:      #00d4ff;
+      --green:     #4ade80;
+      --muted:     rgba(170,170,192,0.9);
+      --card-bg:   rgba(255,255,255,0.05);
+      --card-border: rgba(161,0,255,0.15);
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    /* ── Navbar ─────────────────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: rgba(9,9,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 10px var(--purple);
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: 160px 48px 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .dot-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(161,0,255,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(161,0,255,0.1);
+      border: 1px solid rgba(161,0,255,0.25);
+      border-radius: 100px;
+      padding: 7px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--purple-lt);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); }
+    .hero-title {
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+    .gradient {
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 500;
+    }
+    .hero-sub strong { color: #fff; }
+
+    /* ── Sections ───────────────────────────────────────────────── */
+    section {
+      padding: 70px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    section.alt { background: #0d0d1e; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-header { margin-bottom: 40px; text-align: center; }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+    }
+
+    /* ── Includes list ──────────────────────────────────────────── */
+    .includes-wrap { max-width: 680px; margin: 0 auto; }
+    .includes-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+    .includes-list li {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .check {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+      color: var(--purple-lt);
+      font-weight: 900;
+    }
+
+    /* ── Plan cards ─────────────────────────────────────────────── */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+    @media (max-width: 760px) { .plans-grid { grid-template-columns: 1fr; } }
+
+    .plan-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 24px;
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .plan-name { font-size: 1.5rem; font-weight: 900; margin-bottom: 6px; }
+    .plan-tagline { font-size: 1rem; color: var(--muted); font-weight: 500; margin-bottom: 28px; }
+    .plan-price {
+      font-size: clamp(2.6rem, 6vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .plan-unit { font-size: 1rem; color: var(--muted); font-weight: 700; margin-top: 4px; }
+    .plan-extra {
+      margin-top: 26px;
+      padding-top: 26px;
+      border-top: 1px solid rgba(161,0,255,0.15);
+      font-size: 1.05rem;
+      color: #fff;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .plan-extra span { display: block; font-size: 0.85rem; color: var(--muted); font-weight: 500; margin-top: 4px; }
+
+    /* ── Policy ─────────────────────────────────────────────────── */
+    .policy-wrap { max-width: 780px; margin: 0 auto; }
+    .policy-card {
+      background: rgba(255,200,0,0.06);
+      border: 2px solid rgba(255,200,0,0.25);
+      border-radius: 24px;
+      padding: 36px 36px;
+    }
+    .policy-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #e8d870;
+      margin-bottom: 18px;
+    }
+    .policy-card p {
+      font-size: 1.1rem;
+      color: #fff;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+    .policy-card p + p { margin-top: 16px; }
+    .policy-card strong { color: #e8d870; }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    footer {
+      background: #060610;
+      border-top: 1px solid rgba(161,0,255,0.1);
+      padding: 36px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 7px; }
+    .footer-copy { font-size: 14px; color: rgba(100,100,130,0.9); }
+
+    @media (max-width: 600px) {
+      body { font-size: 17px; }
+      section { padding: 56px 24px; }
+      .hero { padding: 120px 24px 60px; }
+      .navbar { padding: 0 24px; }
+      footer { padding: 28px 24px; flex-direction: column; text-align: center; }
+      .includes-list li { font-size: 1.2rem; }
+      .plan-card { padding: 32px 24px; }
+      .policy-card { padding: 28px 24px; }
+      .policy-card p { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar no-print">
+  <div class="logo">
+    <span class="logo-dot"></span>
+    Conectux
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<div class="hero">
+  <div class="dot-grid"></div>
+  <div class="blob" style="width:600px;height:600px;background:radial-gradient(circle,rgba(161,0,255,0.2) 0%,transparent 65%);top:-180px;left:-150px;animation:f1 10s ease-in-out infinite;"></div>
+  <div class="blob" style="width:450px;height:450px;background:radial-gradient(circle,rgba(0,212,255,0.1) 0%,transparent 65%);bottom:-120px;right:-80px;animation:f2 12s ease-in-out infinite;"></div>
+  <style>
+    @keyframes f1 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(50px,70px) scale(1.05)} }
+    @keyframes f2 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(-60px,-50px) scale(1.08)} }
+  </style>
+
+  <div class="hero-content">
+    <div class="badge"><span class="badge-dot"></span>Propuesta Comercial</div>
+    <h1 class="hero-title">
+      Marketing Digital<br />
+      <span class="gradient">para Naturalma Itagüí</span>
+    </h1>
+    <p class="hero-sub">
+      Contenido, estrategia y pauta digital,<br />
+      <strong>mes a mes.</strong>
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     INCLUYE
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">¿Qué incluye?</h2>
+    </div>
+    <div class="includes-wrap">
+      <ul class="includes-list">
+        <li><span class="check">✓</span> Estrategia de marketing</li>
+        <li><span class="check">✓</span> Grabación de contenido 1 vez al mes</li>
+        <li><span class="check">✓</span> 4 videos al mes</li>
+        <li><span class="check">✓</span> 4 posts al mes</li>
+        <li><span class="check">✓</span> Administración de pauta digital</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PLANES
+══════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Elige tu plan</h2>
+    </div>
+
+    <div class="plans-grid">
+
+      <!-- Tarifa fija -->
+      <div class="plan-card">
+        <div class="plan-name">Tarifa Fija</div>
+        <div class="plan-tagline">Un solo pago mensual</div>
+        <div class="plan-price">$1.500.000</div>
+        <div class="plan-unit">COP / mes</div>
+        <div class="plan-extra">
+          + $600.000 en pauta digital
+          <span>Inversión recomendada, se paga aparte (no a Conectux)</span>
+        </div>
+      </div>
+
+      <!-- Tarifa + comisión -->
+      <div class="plan-card" style="border-color:rgba(0,212,255,0.35);">
+        <div class="plan-name">Tarifa + Comisión</div>
+        <div class="plan-tagline">Pago base más bajo + % sobre ventas</div>
+        <div class="plan-price">$500.000</div>
+        <div class="plan-unit">COP / mes</div>
+        <div class="plan-extra">
+          + 3% de comisión sobre ventas
+          <span>Aplica los días en que las ventas superen $500.000 COP</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     POLÍTICA DE PERMANENCIA
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="container">
+    <div class="policy-wrap">
+      <div class="policy-card">
+        <div class="policy-title">⚠️ Política de permanencia del plan</div>
+        <p>Una vez elegido un plan —<strong>Tarifa Fija</strong> o <strong>Tarifa + Comisión</strong>— no es posible cambiarse al otro plan después.</p>
+        <p>Esto significa que si se elige el plan de comisión y las ventas crecen, por ejemplo a <strong>$2.000.000 diarios</strong>, no se podrá pasar al plan de Tarifa Fija. El plan de comisión implica un pago mensual más bajo desde el inicio, a cambio de participar de las ganancias en el futuro — ese sacrificio inicial de trabajo es lo que da derecho a la comisión sobre las ventas que crezcan más adelante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo"><span class="logo-dot"></span>Conectux</div>
+  <p class="footer-copy">Propuesta confidencial · Naturalma Itagüí · conectux.com</p>
+</footer>
+
+</body>
+</html>
