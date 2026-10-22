@@ -202,6 +202,20 @@
 
     .plans-grid.single { grid-template-columns: minmax(0, 520px); justify-content: center; }
 
+    .info-card {
+      max-width: 520px;
+      margin: 24px auto 0;
+      background: rgba(0,212,255,0.05);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 20px;
+      padding: 28px 28px;
+    }
+    .info-title { font-size: 1.2rem; font-weight: 900; color: var(--cyan); margin-bottom: 12px; }
+    .info-card p { font-size: 1rem; color: var(--muted); line-height: 1.65; font-weight: 500; }
+    .info-card p + p { margin-top: 12px; }
+    .info-card strong { color: #fff; }
+    @media (max-width: 600px) { .info-card { padding: 24px 22px; } }
+
     /* ── Benefits ───────────────────────────────────────────────── */
     .section-sub {
       font-size: 1.15rem;
@@ -409,6 +423,12 @@
           <span>Inversión recomendada, se paga aparte (no a Conectux)</span>
         </div>
       </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-title">¿Qué es la pauta digital?</div>
+      <p>Es el dinero que se invierte directamente en <strong>Facebook e Instagram</strong> para que tus publicaciones y anuncios lleguen a más personas, no solo a quienes ya te siguen.</p>
+      <p>Con la pauta mostramos Sabor a Mar a personas <strong>cerca de tu restaurante</strong> con interés en comida y mariscos, para que te visiten, reserven o pidan a domicilio. Conectux crea, configura y optimiza las campañas; ese dinero se paga directamente a las plataformas.</p>
     </div>
   </div>
 </section>
