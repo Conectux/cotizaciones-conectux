@@ -202,6 +202,41 @@
 
     .plans-grid.single { grid-template-columns: minmax(0, 520px); justify-content: center; }
 
+    /* ── Benefits ───────────────────────────────────────────────── */
+    .section-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.6;
+      margin-top: 14px;
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+    @media (max-width: 900px) { .benefits-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 600px) { .benefits-grid { grid-template-columns: 1fr; } }
+    .benefit-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 28px 24px;
+    }
+    .benefit-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+    .benefit-title { font-size: 1.2rem; font-weight: 900; margin-bottom: 8px; }
+    .benefit-text { font-size: 1rem; color: var(--muted); line-height: 1.6; font-weight: 500; }
+
     /* ── Policy ─────────────────────────────────────────────────── */
     .policy-wrap { max-width: 780px; margin: 0 auto; }
     .policy-card {
@@ -311,9 +346,53 @@
 </section>
 
 <!-- ══════════════════════════════════════════
-     PLAN
+     BENEFICIOS
 ══════════════════════════════════════════ -->
 <section>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Beneficios para <span class="gradient">Sabor a Mar</span></h2>
+      <p class="section-sub">Lo que gana tu restaurante con un plan mensual con Conectux.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">📈</div>
+        <div class="benefit-title">Más ventas</div>
+        <p class="benefit-text">Campañas pensadas para llenar mesas y aumentar los pedidos a domicilio, sobre todo en los días de menos movimiento.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🍽️</div>
+        <div class="benefit-title">Más visitas al restaurante</div>
+        <p class="benefit-text">Pauta segmentada a personas cerca de tu local que buscan dónde comer. Llegan clientes nuevos que todavía no te conocen.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🦐</div>
+        <div class="benefit-title">Platos que antojan</div>
+        <p class="benefit-text">Fotos y videos profesionales de tus platos que despiertan el antojo y muestran la calidad de lo que sirves.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">💬</div>
+        <div class="benefit-title">Más reservas y pedidos por WhatsApp</div>
+        <p class="benefit-text">Publicaciones y anuncios que invitan a escribir, reservar o pedir directamente, sin intermediarios.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🔁</div>
+        <div class="benefit-title">Clientes que vuelven</div>
+        <p class="benefit-text">Presencia constante en redes para que tus clientes recuerden a Sabor a Mar y vuelvan por su plato favorito.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">⏱️</div>
+        <div class="benefit-title">Tú te enfocas en la cocina</div>
+        <p class="benefit-text">Nosotros nos encargamos del contenido, las redes y la pauta. Recibes resultados medibles cada mes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PLAN
+══════════════════════════════════════════ -->
+<section class="alt">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">Inversión mensual</h2>
