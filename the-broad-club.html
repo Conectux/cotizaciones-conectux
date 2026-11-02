@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propuesta Google Ads – The Broad Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #09090f;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    :root {
+      --purple:    #a100ff;
+      --purple-lt: #c84bff;
+      --purple-dk: #7b00cc;
+      --cyan:      #00d4ff;
+      --green:     #4ade80;
+      --muted:     rgba(160,160,184,0.85);
+      --card-bg:   rgba(255,255,255,0.05);
+      --card-border: rgba(161,0,255,0.15);
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    /* ── Navbar ─────────────────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: rgba(9,9,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 10px var(--purple);
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: 160px 48px 100px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .dot-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(161,0,255,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(161,0,255,0.1);
+      border: 1px solid rgba(161,0,255,0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--purple-lt);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); }
+    .hero-title {
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+    .gradient {
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .hero-sub strong { color: #fff; }
+
+    /* ── Sections ───────────────────────────────────────────────── */
+    section {
+      padding: 80px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    section.alt { background: #0d0d1e; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-header { margin-bottom: 48px; }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-sub { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 620px; }
+
+    /* ── Account card ────────────────────────────────────────────── */
+    .schools-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 440px;
+      margin: 0 auto;
+      gap: 20px;
+    }
+    @media (max-width: 760px) { .schools-grid { grid-template-columns: 1fr; } }
+
+    .school-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+    .school-card:hover {
+      border-color: rgba(161,0,255,0.35);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(161,0,255,0.15);
+    }
+    .school-avatar {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 900;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      margin-bottom: 18px;
+    }
+    .school-name { font-size: 1.15rem; font-weight: 900; margin-bottom: 4px; }
+    .school-type { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+    .services-list { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .services-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(161,0,255,0.1);
+      border: 1px solid rgba(161,0,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+      color: var(--purple-lt);
+      font-weight: 900;
+    }
+    .school-price {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(161,0,255,0.1);
+    }
+    .price-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .price-amount {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .price-currency { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Summary ────────────────────────────────────────────────── */
+    .summary-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .summary-table { width: 100%; border-collapse: collapse; }
+    .summary-table thead th {
+      background: rgba(161,0,255,0.07);
+      padding: 14px 28px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+    }
+    .summary-table tbody tr { border-bottom: 1px solid rgba(161,0,255,0.07); }
+    .summary-table tbody tr:last-child { border-bottom: none; }
+    .summary-table tbody td { padding: 16px 28px; font-size: 15px; }
+    .td-name { font-weight: 700; }
+    .td-price {
+      font-weight: 900;
+      text-align: right;
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+    }
+    .summary-total {
+      background: linear-gradient(90deg, rgba(161,0,255,0.1), rgba(0,212,255,0.05));
+      border-top: 1px solid rgba(161,0,255,0.2);
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .total-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+    .total-amount {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .total-currency { font-size: 14px; color: var(--muted); margin-left: 6px; }
+
+    /* ── Ad spend recommendation ────────────────────────────────── */
+    .adspend-wrap { max-width: 760px; margin: 0 auto; }
+    .adspend-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+    .adspend-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+      flex-wrap: wrap;
+    }
+    .adspend-row:last-of-type { border-bottom: none; }
+    .adspend-label { font-size: 14.5px; color: var(--muted); }
+    .adspend-value { font-size: 1.15rem; font-weight: 900; color: #fff; white-space: nowrap; }
+    .adspend-total {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(0,212,255,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .adspend-total-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+    .adspend-total-amount {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--cyan), var(--purple-lt));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .adspend-note { font-size: 13px; color: var(--muted); line-height: 1.65; margin-top: 20px; }
+
+
+    /* ── Info cards / lists ─────────────────────────────────────── */
+    .info-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+    .info-card + .info-card { margin-top: 20px; }
+    .info-card-title { font-size: 1.1rem; font-weight: 900; margin-bottom: 14px; }
+    .info-text { font-size: 15px; color: var(--muted); line-height: 1.75; }
+    .info-text + .info-text { margin-top: 12px; }
+    .info-text strong { color: #fff; }
+    .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .bullet-list li {
+      display: flex;
+      gap: 12px;
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .bullet-list li strong { color: #fff; }
+    .bullet-list .check { margin-top: 2px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    @media (max-width: 760px) { .grid-2 { grid-template-columns: 1fr; } }
+    .mini-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .mini-num {
+      width: 32px; height: 32px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      font-weight: 900; font-size: 14px;
+      margin-bottom: 14px;
+    }
+    .mini-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .mini-text { font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 4px 0 20px; }
+    .chip {
+      background: rgba(0,212,255,0.06);
+      border: 1px solid rgba(0,212,255,0.2);
+      color: #bff3ff;
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+    .td-muted { color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .td-right { text-align: right; white-space: nowrap; }
+    .table-scroll { overflow-x: auto; }
+    .table-scroll .summary-table { min-width: 640px; }
+    .table-foot td { font-weight: 900; background: rgba(161,0,255,0.07); }
+    .table-note { font-size: 13px; color: var(--muted); line-height: 1.65; margin-top: 16px; }
+    .callout {
+      margin-top: 20px;
+      background: rgba(0,212,255,0.05);
+      border: 1px solid rgba(0,212,255,0.18);
+      border-radius: 16px;
+      padding: 18px 22px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .callout strong { color: #fff; }
+    .price-extra { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.6; }
+    .price-extra strong { color: #fff; }
+    .gift {
+      margin-top: 20px;
+      background: rgba(74,222,128,0.06);
+      border: 1px solid rgba(74,222,128,0.2);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 13.5px;
+      color: rgba(200,255,220,0.9);
+      line-height: 1.6;
+    }
+    .gift strong { color: var(--green); }
+
+    /* ── Final note ─────────────────────────────────────────────── */
+    .final-note {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: rgba(255,200,0,0.05);
+      border: 1px solid rgba(255,200,0,0.15);
+      border-radius: 16px;
+      padding: 24px 26px;
+    }
+    .final-note-icon { font-size: 18px; flex-shrink: 0; }
+    .final-note-title { font-size: 14px; font-weight: 700; color: #e8d870; margin-bottom: 8px; }
+    .final-note ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .final-note li { font-size: 13px; color: rgba(200,184,96,0.9); line-height: 1.6; padding-left: 14px; position: relative; }
+    .final-note li::before { content: '–'; position: absolute; left: 0; }
+
+    /* ── Closing ────────────────────────────────────────────────── */
+    .closing {
+      background: rgba(161,0,255,0.05);
+      border: 1px solid rgba(161,0,255,0.15);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .closing-title { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 16px; }
+    .closing-text { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 560px; margin: 0 auto 28px; }
+    .closing-text strong { color: var(--purple-lt); }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    footer {
+      background: #060610;
+      border-top: 1px solid rgba(161,0,255,0.1);
+      padding: 36px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 7px; }
+    .footer-copy { font-size: 13px; color: rgba(90,90,120,0.9); }
+
+    @media (max-width: 600px) {
+      section { padding: 60px 24px; }
+      .hero { padding: 120px 24px 80px; }
+      .navbar { padding: 0 24px; }
+      footer { padding: 28px 24px; }
+
+      .badge { font-size: 13px; }
+      .section-sub { font-size: 16px; }
+      .school-type { font-size: 14px; }
+      .services-list li { font-size: 15.5px; }
+      .price-label { font-size: 12px; }
+      .price-currency { font-size: 13px; }
+      .summary-table thead th { font-size: 12px; }
+      .summary-table tbody td { font-size: 16px; }
+      .total-label { font-size: 14px; }
+      .total-currency { font-size: 15px; }
+      .adspend-label { font-size: 15.5px; }
+      .adspend-value { font-size: 1.25rem; }
+      .adspend-note { font-size: 14px; }
+      .closing-text { font-size: 16px; }
+      .final-note-title { font-size: 15px; }
+      .final-note li { font-size: 14.5px; }
+      .footer-copy { font-size: 14px; }
+      .info-card { padding: 24px; }
+      .info-text { font-size: 16px; }
+      .bullet-list li { font-size: 15.5px; }
+      .mini-text { font-size: 15px; }
+      .table-note, .callout, .price-extra { font-size: 14.5px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar no-print">
+  <div class="logo">
+    <span class="logo-dot"></span>
+    Conectux
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<div class="hero">
+  <div class="dot-grid"></div>
+  <div class="blob" style="width:600px;height:600px;background:radial-gradient(circle,rgba(161,0,255,0.2) 0%,transparent 65%);top:-180px;left:-150px;animation:f1 10s ease-in-out infinite;"></div>
+  <div class="blob" style="width:450px;height:450px;background:radial-gradient(circle,rgba(0,212,255,0.1) 0%,transparent 65%);bottom:-120px;right:-80px;animation:f2 12s ease-in-out infinite;"></div>
+  <style>
+    @keyframes f1 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(50px,70px) scale(1.05)} }
+    @keyframes f2 { 0%,100%{transform:translate(0) scale(1)} 50%{transform:translate(-60px,-50px) scale(1.08)} }
+  </style>
+
+  <div class="hero-content">
+    <div class="badge"><span class="badge-dot"></span>Propuesta Estratégica · 30 de octubre de 2026</div>
+    <h1 class="hero-title">
+      Google Ads<br />
+      <span class="gradient">para The Broad Club</span>
+    </h1>
+    <p class="hero-sub">
+      Promoción de estudios universitarios en Reino Unido dirigida al mercado colombiano.<br />
+      <strong>Plan inicial de campañas · Inversión sugerida en medios: USD 2.000 mensuales.</strong>
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     1. OBJETIVO
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Objetivo<br /><span class="gradient">de la propuesta</span></h2>
+    </div>
+    <div class="info-card">
+      <p class="info-text">Generar <strong>solicitudes de asesoría de personas en Colombia que desean estudiar pregrados o posgrados en el Reino Unido</strong>.</p>
+      <p class="info-text">La estrategia prioriza contactos con intención real, capacidad de continuar el proceso y posibilidades de convertirse en <strong>postulaciones y matrículas</strong>, no únicamente la cantidad de mensajes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     2. ESTRATEGIA DE CAMPAÑAS
+══════════════════════════════════════════ -->
+<section>
+  <div class="blob" style="width:500px;height:500px;background:radial-gradient(circle,rgba(161,0,255,0.07) 0%,transparent 65%);top:50%;right:-150px;transform:translateY(-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Estrategia de campañas<br /><span class="gradient">USD 2.000 / mes</span></h2>
+      <p class="section-sub">Comenzamos con campañas de Búsqueda para captar usuarios que ya están investigando cómo estudiar en Reino Unido. La distribución se ajustará con el volumen de búsquedas, la calidad de los contactos y los resultados de las primeras semanas.</p>
+    </div>
+
+    <div class="summary-wrap">
+      <div class="table-scroll">
+        <table class="summary-table">
+          <thead>
+            <tr>
+              <th>Campaña</th>
+              <th>Enfoque de captación</th>
+              <th style="text-align:right;">Mensual</th>
+              <th style="text-align:right;">Diario*</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-name">Búsqueda: maestrías y posgrados</td>
+              <td class="td-muted">Personas que buscan másteres, maestrías y estudios de posgrado en Reino Unido.</td>
+              <td class="td-price">USD 900</td>
+              <td class="td-right td-muted">USD 30,00</td>
+            </tr>
+            <tr>
+              <td class="td-name">Búsqueda: pregrados</td>
+              <td class="td-muted">Personas interesadas en estudiar una carrera universitaria en Inglaterra o Reino Unido.</td>
+              <td class="td-price">USD 550</td>
+              <td class="td-right td-muted">USD 18,33</td>
+            </tr>
+            <tr>
+              <td class="td-name">Búsqueda: orientación y admisión</td>
+              <td class="td-muted">Usuarios que buscan asesoría universitaria, requisitos, proceso de aplicación y opciones de universidades.</td>
+              <td class="td-price">USD 350</td>
+              <td class="td-right td-muted">USD 11,67</td>
+            </tr>
+            <tr>
+              <td class="td-name">Reserva: remarketing o refuerzo de Búsqueda</td>
+              <td class="td-muted">Remarketing solo si hay audiencias aptas y medición/consentimiento; de lo contrario, se refuerza la Búsqueda de mejor calidad.</td>
+              <td class="td-price">USD 200</td>
+              <td class="td-right td-muted">USD 6,67</td>
+            </tr>
+            <tr class="table-foot">
+              <td>TOTAL</td>
+              <td></td>
+              <td class="td-price">USD 2.000</td>
+              <td class="td-right">USD 66,67</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="table-note">*Promedios orientativos calculados sobre 30 días; los presupuestos diarios se configuran y controlan dentro de Google Ads. La inversión publicitaria no incluye honorarios ni desarrollos web.</p>
+
+    <div class="callout">
+      <strong>Sobre el presupuesto:</strong> sabemos que el presupuesto mencionado en la reunión fue de USD 2.500. Proponemos iniciar con USD 2.000 e ir subiendo la inversión a medida que se obtenga data y se confirme la calidad de los contactos.
+    </div>
+
+    <div class="info-card" style="margin-top:32px;">
+      <div class="info-card-title">Configuración inicial recomendada</div>
+      <ul class="bullet-list">
+        <li><span class="check">✓</span><span><strong>Orientación geográfica a Colombia</strong>, con opción de presencia física; luego se revisan las ciudades y zonas con mejor calidad de contacto.</span></li>
+        <li><span class="check">✓</span><span><strong>Grupos separados por intención</strong> (pregrado, maestría, asesoría) y anuncios con beneficios reales, propuesta de valor y llamado a la acción.</span></li>
+        <li><span class="check">✓</span><span><strong>Palabras clave prioritarias</strong> en concordancia exacta y de frase; revisión periódica de términos de búsqueda y exclusión de consultas irrelevantes.</span></li>
+        <li><span class="check">✓</span><span><strong>Medición</strong> de formularios enviados, llamadas efectivas y conversaciones de WhatsApp, diferenciando clics de contactos calificados.</span></li>
+        <li><span class="check">✓</span><span><strong>Optimización del presupuesto</strong> según solicitudes aptas, entrevistas y avances del proceso comercial. No se recomienda dispersar el presupuesto en muchas campañas desde el inicio.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     3. BÚSQUEDAS
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Ejemplos de búsquedas<br /><span class="gradient">a trabajar</span></h2>
+    </div>
+    <div class="chips">
+      <span class="chip">estudiar en reino unido desde colombia</span>
+      <span class="chip">maestrías en inglaterra</span>
+      <span class="chip">universidades en inglaterra para colombianos</span>
+      <span class="chip">estudiar pregrado en reino unido</span>
+      <span class="chip">asesoría para estudiar en inglaterra</span>
+      <span class="chip">requisitos para estudiar universidad en reino unido</span>
+    </div>
+    <div class="info-card">
+      <p class="info-text">La mayoría de estos términos se obtendrán del <strong>historial de sus campañas publicitarias anteriores</strong> (sección de términos de búsqueda), teniendo en cuenta sus métricas de rendimiento.</p>
+      <p class="info-text">La lista definitiva dependerá de las búsquedas disponibles y de la oferta académica que se confirme.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     4. PÁGINAS WEB
+══════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Páginas de destino<br /><span class="gradient">alcance de la revisión</span></h2>
+      <p class="section-sub">En esta etapa <strong style="color:#fff;">no se realiza un análisis ni una auditoría de la página web</strong>. La selección y revisión de las URL, la evaluación de sus contenidos y las recomendaciones específicas se harán una vez se formalice la contratación y se definan las páginas de destino de cada campaña.</p>
+    </div>
+
+    <div class="callout" style="margin:0 0 32px;">
+      <strong>Condición inicial:</strong> cada página que reciba tráfico publicitario debe explicar inmediatamente qué ofrece la empresa y facilitar el contacto, especialmente desde dispositivos móviles.
+    </div>
+
+    <div class="info-card-title">Elementos básicos recomendados</div>
+    <div class="grid-2" style="margin-top:16px;">
+      <div class="mini-card">
+        <div class="mini-num">1</div>
+        <div class="mini-title">Mensaje directo en el primer pantallazo</div>
+        <p class="mini-text">Indicar claramente la oferta, por ejemplo: “Asesoría para estudiar pregrados y maestrías en Reino Unido desde Colombia”. Evitar introducciones extensas.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">2</div>
+        <div class="mini-title">WhatsApp y llamada visibles</div>
+        <p class="mini-text">Botón flotante de WhatsApp y botón de llamada, funcionales en celular, sin cubrir el contenido ni los formularios.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">3</div>
+        <div class="mini-title">Llamados a la acción claros</div>
+        <p class="mini-text">Repetidos en puntos estratégicos: “Habla con un asesor”, “Consulta tus opciones de estudio” o “Evalúa tu perfil”.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">4</div>
+        <div class="mini-title">Formulario sencillo</div>
+        <p class="mini-text">Que identifique programa de interés, datos de contacto y fecha estimada de inicio; con aviso de privacidad y consentimiento.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">5</div>
+        <div class="mini-title">Reseñas y testimonios reales</div>
+        <p class="mini-text">De estudiantes, con autorización para su publicación; destacar resultados verificables sin prometer admisiones.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">6</div>
+        <div class="mini-title">Reseñas en Google Business Profile</div>
+        <p class="mini-text">Solicitud constante de reseñas auténticas, solo si existe una ficha elegible y verificada; responderlas y mantener la información actualizada.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">7</div>
+        <div class="mini-title">Información comercial concreta</div>
+        <p class="mini-text">Niveles de estudio, modalidades de acompañamiento, requisitos generales, países atendidos y pasos para comenzar. Distinguir servicios gratuitos y con costo.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">8</div>
+        <div class="mini-title">Páginas rápidas y probadas</div>
+        <p class="mini-text">Adaptadas a móviles, con formularios, enlaces y botones probados. La medición de formularios, llamadas y WhatsApp se verificará tras la contratación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     5. TRABAJO TRAS LA CONTRATACIÓN
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Trabajo después de<br /><span class="gradient">iniciar la contratación</span></h2>
+    </div>
+    <div class="grid-2">
+      <div class="mini-card">
+        <div class="mini-num">1</div>
+        <div class="mini-title">Diagnóstico comercial</div>
+        <p class="mini-text">Reunión para identificar programas, universidades, públicos admitidos, requisitos, fechas de ingreso y proceso de venta.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">2</div>
+        <div class="mini-title">Páginas de destino</div>
+        <p class="mini-text">Definir qué páginas se utilizarán, revisarlas individualmente y entregar observaciones sobre contenido, SEO básico, velocidad, formularios, botones y llamados a la acción.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">3</div>
+        <div class="mini-title">Medición</div>
+        <p class="mini-text">Verificar Google Ads, Analytics y Tag Manager; configurar y probar las conversiones relevantes antes de optimizar por leads.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">4</div>
+        <div class="mini-title">Construcción de campañas</div>
+        <p class="mini-text">Investigar palabras clave y competidores; construir campañas, anuncios, recursos, negativas y segmentaciones.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">5</div>
+        <div class="mini-title">Seguimiento y optimización</div>
+        <p class="mini-text">Seguimiento de términos de búsqueda, costos y calidad de cada consulta, con ajustes e informe de resultados.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">6</div>
+        <div class="mini-title">Coordinación comercial</div>
+        <p class="mini-text">Con el equipo comercial, calificar interesados y registrar cuántos contactos avanzan a entrevista, solicitud de admisión o matrícula.</p>
+      </div>
+    </div>
+
+    <div class="info-card" style="margin-top:32px;">
+      <div class="info-card-title">Posicionamiento y reputación (complementario)</div>
+      <p class="info-text">Una vez seleccionadas las páginas, se plantearán mejoras de SEO específicas: <strong>títulos y metadescripciones, encabezados claros, contenido alineado con las búsquedas de Colombia, enlaces internos y estructura móvil</strong>.</p>
+      <p class="info-text">En Google Business Profile se recomienda mantener reseñas recientes y legítimas, publicaciones e información de atención actualizada, cuando la empresa tenga un perfil elegible. No se plantea crear fichas para ubicaciones sin presencia real.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     6. ADMINISTRACIÓN
+══════════════════════════════════════════ -->
+<section>
+  <div class="blob" style="width:500px;height:500px;background:radial-gradient(circle,rgba(161,0,255,0.07) 0%,transparent 65%);top:50%;right:-150px;transform:translateY(-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Administración<br /><span class="gradient">de la cuenta</span></h2>
+      <p class="section-sub">Honorarios de Conectux por la gestión de las campañas, por separado de la inversión que se paga a Google.</p>
+    </div>
+
+    <div class="schools-grid">
+      <div class="school-card">
+        <div class="school-avatar">BC</div>
+        <div class="school-name">The Broad Club</div>
+        <div class="school-type">Cuenta de Google Ads · 3 campañas activas</div>
+        <ul class="services-list">
+          <li><span class="check">✓</span> Hasta 3 campañas activas</li>
+          <li><span class="check">✓</span> Configuración y optimización continua</li>
+          <li><span class="check">✓</span> Medición de conversiones y leads</li>
+          <li><span class="check">✓</span> Informe mensual de resultados</li>
+          <li><span class="check">✓</span> Reunión mensual de métricas*</li>
+          <li><span class="check">✓</span> Grupo de trabajo para seguimiento</li>
+        </ul>
+        <div class="gift"><strong>🎁 Obsequio:</strong> después del primer mes, análisis de atención al cliente y, si es necesario, retroalimentación de mejora.</div>
+        <div class="school-price">
+          <div class="price-label">Valor administración</div>
+          <div class="price-amount">$700.000</div>
+          <div class="price-currency">COP / mes</div>
+          <p class="price-extra">Campaña adicional: <strong>$120.000 COP / mes</strong> por cada una.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card" style="margin-top:32px;">
+      <div class="info-card-title">Acompañamiento</div>
+      <ul class="bullet-list">
+        <li><span class="check">✓</span><span><strong>*Reunión mensual</strong>, después de los primeros 5 días de cada mes, para revisar métricas y cambios en tiempo real, con acompañamiento del encargado del área comercial de la empresa.</span></li>
+        <li><span class="check">✓</span><span><strong>Grupo de trabajo</strong> para compartir y ajustar lo que se va trabajando y moldeando en el transcurso de las labores.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     7. INVERSIÓN TOTAL
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="blob" style="width:400px;height:400px;background:radial-gradient(circle,rgba(0,212,255,0.08) 0%,transparent 65%);bottom:-80px;right:-80px;filter:blur(60px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Resumen de<br /><span class="gradient">inversión mensual</span></h2>
+    </div>
+
+    <div class="adspend-wrap">
+      <div class="adspend-card">
+        <div class="adspend-row">
+          <span class="adspend-label">Administración Conectux (3 campañas activas)</span>
+          <span class="adspend-value">$700.000 COP / mes</span>
+        </div>
+        <div class="adspend-row">
+          <span class="adspend-label">Cada campaña adicional</span>
+          <span class="adspend-value">$120.000 COP / mes</span>
+        </div>
+        <div class="adspend-row">
+          <span class="adspend-label">Pauta en Google Ads (se paga directamente a Google)</span>
+          <span class="adspend-value">USD 2.000 / mes</span>
+        </div>
+        <p class="adspend-note">El plan propuesto contempla 3 campañas de Búsqueda incluidas en la administración. Si se activa la campaña de remarketing como campaña independiente, se suma como campaña adicional. La pauta la pagan ustedes directamente a Google (no a Conectux) y puede ir aumentando según los resultados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CIERRE
+══════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="closing">
+      <div class="blob" style="width:400px;height:300px;background:radial-gradient(circle,rgba(161,0,255,0.1) 0%,transparent 70%);top:-100px;left:50%;transform:translateX(-50%);filter:blur(50px);"></div>
+      <p class="closing-title" style="position:relative;z-index:1;">Contactos con intención real</p>
+      <p class="closing-text" style="position:relative;z-index:1;">
+        Queremos ayudar a que <strong>The Broad Club</strong> aparezca cuando una persona en Colombia busca cómo estudiar en el Reino Unido, y que ese contacto avance hasta la matrícula.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     POLÍTICAS Y CONDICIONES
+══════════════════════════════════════════ -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="final-note">
+      <span class="final-note-icon">⚠️</span>
+      <div>
+        <div class="final-note-title">Políticas, medición y condiciones</div>
+        <ul>
+          <li>La publicidad debe reflejar con exactitud la relación con universidades, los programas disponibles y las condiciones reales del acompañamiento.</li>
+          <li>No se prometerán admisión, visa, empleo, becas o residencia garantizados. Las referencias a requisitos migratorios deberán verificarse con fuentes oficiales.</li>
+          <li>La inversión de USD 2.000 corresponde a pauta mensual en Google Ads pagada directamente a la plataforma; los honorarios de administración y los ajustes web se cotizan por separado.</li>
+          <li>Los resultados dependen de competencia, demanda, calidad de las páginas, tiempos de respuesta y proceso comercial. No se garantiza una cantidad específica de contactos ni matrículas.</li>
+          <li>Esta cotización no incluye diseño o desarrollo de landing pages ni ajustes web.</li>
+          <li>Propuesta preliminar sujeta a validación de la oferta académica, acceso a las cuentas publicitarias y aprobación de las páginas de destino.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Footer -->
+<footer>
+  <div class="footer-logo"><span class="logo-dot"></span>Conectux</div>
+  <p class="footer-copy">Propuesta confidencial · The Broad Club · conectux.com</p>
+</footer>
+
+</body>
+</html>
