@@ -15,7 +15,6 @@
       color: #fff;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
-      font-size: 18px;
     }
     :root {
       --purple:    #a100ff;
@@ -23,7 +22,7 @@
       --purple-dk: #7b00cc;
       --cyan:      #00d4ff;
       --green:     #4ade80;
-      --muted:     rgba(170,170,192,0.9);
+      --muted:     rgba(160,160,184,0.85);
       --card-bg:   rgba(255,255,255,0.05);
       --card-border: rgba(161,0,255,0.15);
     }
@@ -64,7 +63,7 @@
     /* ── Hero ───────────────────────────────────────────────────── */
     .hero {
       position: relative;
-      padding: 160px 48px 80px;
+      padding: 160px 48px 100px;
       text-align: center;
       overflow: hidden;
     }
@@ -82,7 +81,7 @@
       pointer-events: none;
       z-index: 0;
     }
-    .hero-content { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
     .badge {
       display: inline-flex;
       align-items: center;
@@ -90,17 +89,17 @@
       background: rgba(161,0,255,0.1);
       border: 1px solid rgba(161,0,255,0.25);
       border-radius: 100px;
-      padding: 7px 18px;
-      font-size: 14px;
+      padding: 6px 16px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--purple-lt);
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
     .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); }
     .hero-title {
-      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
       font-weight: 900;
       line-height: 1.08;
       letter-spacing: -2px;
@@ -113,135 +112,317 @@
       background-clip: text;
     }
     .hero-sub {
-      font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+      font-size: 1.1rem;
       color: var(--muted);
-      line-height: 1.6;
-      font-weight: 500;
+      line-height: 1.75;
     }
     .hero-sub strong { color: #fff; }
 
     /* ── Sections ───────────────────────────────────────────────── */
     section {
-      padding: 70px 48px;
+      padding: 80px 48px;
       position: relative;
       overflow: hidden;
     }
     section.alt { background: #0d0d1e; }
-    .container { max-width: 1000px; margin: 0 auto; }
-    .section-header { margin-bottom: 40px; text-align: center; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-header { margin-bottom: 48px; }
     .section-title {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
       font-weight: 900;
       letter-spacing: -0.5px;
       line-height: 1.15;
+      margin-bottom: 12px;
     }
+    .section-sub { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 620px; }
 
-    /* ── Includes list ──────────────────────────────────────────── */
-    .includes-wrap { max-width: 680px; margin: 0 auto; }
-    .includes-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
-    .includes-list li {
+    /* ── Account card ────────────────────────────────────────────── */
+    .schools-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 440px;
+      margin: 0 auto;
+      gap: 20px;
+    }
+    @media (max-width: 760px) { .schools-grid { grid-template-columns: 1fr; } }
+
+    .school-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+    .school-card:hover {
+      border-color: rgba(161,0,255,0.35);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(161,0,255,0.15);
+    }
+    .school-avatar {
+      width: 48px; height: 48px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
-      gap: 18px;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #fff;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 900;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      margin-bottom: 18px;
+    }
+    .school-name { font-size: 1.15rem; font-weight: 900; margin-bottom: 4px; }
+    .school-type { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+    .services-list { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .services-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
     }
     .check {
-      width: 36px; height: 36px;
+      width: 20px; height: 20px;
       border-radius: 50%;
-      background: rgba(161,0,255,0.12);
-      border: 1px solid rgba(161,0,255,0.3);
+      background: rgba(161,0,255,0.1);
+      border: 1px solid rgba(161,0,255,0.25);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      font-size: 16px;
+      font-size: 10px;
       color: var(--purple-lt);
       font-weight: 900;
     }
-
-    /* ── Plan cards ─────────────────────────────────────────────── */
-    .plans-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
+    .school-price {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(161,0,255,0.1);
     }
-    @media (max-width: 760px) { .plans-grid { grid-template-columns: 1fr; } }
-
-    .plan-card {
-      background: var(--card-bg);
-      border: 2px solid var(--card-border);
-      border-radius: 24px;
-      padding: 40px 32px;
-      text-align: center;
-    }
-    .plan-name { font-size: 1.5rem; font-weight: 900; margin-bottom: 6px; }
-    .plan-tagline { font-size: 1rem; color: var(--muted); font-weight: 500; margin-bottom: 28px; }
-    .plan-price {
-      font-size: clamp(2.6rem, 6vw, 3.4rem);
+    .price-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .price-amount {
+      font-size: 2rem;
       font-weight: 900;
-      letter-spacing: -1.5px;
+      letter-spacing: -1px;
       background: linear-gradient(135deg, var(--purple-lt), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .plan-unit { font-size: 1rem; color: var(--muted); font-weight: 700; margin-top: 4px; }
-    .plan-extra {
-      margin-top: 26px;
-      padding-top: 26px;
-      border-top: 1px solid rgba(161,0,255,0.15);
-      font-size: 1.05rem;
-      color: #fff;
-      font-weight: 700;
-      line-height: 1.5;
+    .price-currency { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Summary ────────────────────────────────────────────────── */
+    .summary-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
     }
-    .plan-extra span { display: block; font-size: 0.85rem; color: var(--muted); font-weight: 500; margin-top: 4px; }
-    .terms-note {
-      max-width: 520px;
-      margin: 28px auto 0;
+    .summary-table { width: 100%; border-collapse: collapse; }
+    .summary-table thead th {
+      background: rgba(161,0,255,0.07);
+      padding: 14px 28px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+    }
+    .summary-table tbody tr { border-bottom: 1px solid rgba(161,0,255,0.07); }
+    .summary-table tbody tr:last-child { border-bottom: none; }
+    .summary-table tbody td { padding: 16px 28px; font-size: 15px; }
+    .td-name { font-weight: 700; }
+    .td-price {
+      font-weight: 900;
+      text-align: right;
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+    }
+    .summary-total {
+      background: linear-gradient(90deg, rgba(161,0,255,0.1), rgba(0,212,255,0.05));
+      border-top: 1px solid rgba(161,0,255,0.2);
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .total-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+    .total-amount {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--purple-lt), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .total-currency { font-size: 14px; color: var(--muted); margin-left: 6px; }
+
+    /* ── Ad spend recommendation ────────────────────────────────── */
+    .adspend-wrap { max-width: 760px; margin: 0 auto; }
+    .adspend-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+    .adspend-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(161,0,255,0.1);
+      flex-wrap: wrap;
+    }
+    .adspend-row:last-of-type { border-bottom: none; }
+    .adspend-label { font-size: 14.5px; color: var(--muted); }
+    .adspend-value { font-size: 1.15rem; font-weight: 900; color: #fff; white-space: nowrap; }
+    .adspend-total {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(0,212,255,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .adspend-total-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+    .adspend-total-amount {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--cyan), var(--purple-lt));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .adspend-note { font-size: 13px; color: var(--muted); line-height: 1.65; margin-top: 20px; }
+
+
+    /* ── Info cards / lists ─────────────────────────────────────── */
+    .info-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+    .info-card + .info-card { margin-top: 20px; }
+    .info-card-title { font-size: 1.1rem; font-weight: 900; margin-bottom: 14px; }
+    .info-text { font-size: 15px; color: var(--muted); line-height: 1.75; }
+    .info-text + .info-text { margin-top: 12px; }
+    .info-text strong { color: #fff; }
+    .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .bullet-list li {
       display: flex;
       gap: 12px;
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .bullet-list li strong { color: #fff; }
+    .bullet-list .check { margin-top: 2px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    @media (max-width: 760px) { .grid-2 { grid-template-columns: 1fr; } }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    @media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr; } }
+    .mini-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .mini-num {
+      width: 32px; height: 32px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(161,0,255,0.12);
+      border: 1px solid rgba(161,0,255,0.25);
+      color: var(--purple-lt);
+      font-weight: 900; font-size: 14px;
+      margin-bottom: 14px;
+    }
+    .mini-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .mini-text { font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 4px 0 20px; }
+    .chip {
+      background: rgba(0,212,255,0.06);
+      border: 1px solid rgba(0,212,255,0.2);
+      color: #bff3ff;
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+    .td-muted { color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .td-right { text-align: right; white-space: nowrap; }
+    .table-scroll { overflow-x: auto; }
+    .table-scroll .summary-table { min-width: 640px; }
+    .table-foot td { font-weight: 900; background: rgba(161,0,255,0.07); }
+    .table-note { font-size: 13px; color: var(--muted); line-height: 1.65; margin-top: 16px; }
+    .callout {
+      margin-top: 20px;
+      background: rgba(0,212,255,0.05);
+      border: 1px solid rgba(0,212,255,0.18);
+      border-radius: 16px;
+      padding: 18px 22px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .callout strong { color: #fff; }
+    .price-extra { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.6; }
+    .price-extra strong { color: #fff; }
+    .gift {
+      margin-top: 20px;
+      background: rgba(74,222,128,0.06);
+      border: 1px solid rgba(74,222,128,0.2);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 13.5px;
+      color: rgba(200,255,220,0.9);
+      line-height: 1.6;
+    }
+    .gift strong { color: var(--green); }
+
+    /* ── Final note ─────────────────────────────────────────────── */
+    .final-note {
+      display: flex;
+      gap: 14px;
       align-items: flex-start;
       background: rgba(255,200,0,0.05);
       border: 1px solid rgba(255,200,0,0.15);
       border-radius: 16px;
-      padding: 18px 22px;
-      font-size: 14px;
-      color: rgba(200,184,96,0.9);
-      line-height: 1.6;
+      padding: 24px 26px;
     }
-    .terms-note strong { color: #e8d870; }
-    .plan-extra + .plan-extra { border-top: none; padding-top: 0; margin-top: 16px; }
+    .final-note-icon { font-size: 18px; flex-shrink: 0; }
+    .final-note-title { font-size: 14px; font-weight: 700; color: #e8d870; margin-bottom: 8px; }
+    .final-note ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .final-note li { font-size: 13px; color: rgba(200,184,96,0.9); line-height: 1.6; padding-left: 14px; position: relative; }
+    .final-note li::before { content: '–'; position: absolute; left: 0; }
 
-    .plans-grid.single { grid-template-columns: minmax(0, 520px); justify-content: center; }
-
-    /* ── Policy ─────────────────────────────────────────────────── */
-    .policy-wrap { max-width: 780px; margin: 0 auto; }
-    .policy-card {
-      background: rgba(255,200,0,0.06);
-      border: 2px solid rgba(255,200,0,0.25);
-      border-radius: 24px;
-      padding: 36px 36px;
+    /* ── Closing ────────────────────────────────────────────────── */
+    .closing {
+      background: rgba(161,0,255,0.05);
+      border: 1px solid rgba(161,0,255,0.15);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .policy-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.4rem;
-      font-weight: 900;
-      color: #e8d870;
-      margin-bottom: 18px;
-    }
-    .policy-card p {
-      font-size: 1.1rem;
-      color: #fff;
-      line-height: 1.7;
-      font-weight: 500;
-    }
-    .policy-card p + p { margin-top: 16px; }
-    .policy-card strong { color: #e8d870; }
+    .closing-title { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 16px; }
+    .closing-text { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 560px; margin: 0 auto 28px; }
+    .closing-text strong { color: var(--purple-lt); }
 
     /* ── Footer ─────────────────────────────────────────────────── */
     footer {
@@ -255,18 +436,36 @@
       gap: 16px;
     }
     .footer-logo { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 7px; }
-    .footer-copy { font-size: 14px; color: rgba(100,100,130,0.9); }
+    .footer-copy { font-size: 13px; color: rgba(90,90,120,0.9); }
 
     @media (max-width: 600px) {
-      body { font-size: 17px; }
-      section { padding: 56px 24px; }
-      .hero { padding: 120px 24px 60px; }
+      section { padding: 60px 24px; }
+      .hero { padding: 120px 24px 80px; }
       .navbar { padding: 0 24px; }
-      footer { padding: 28px 24px; flex-direction: column; text-align: center; }
-      .includes-list li { font-size: 1.2rem; }
-      .plan-card { padding: 32px 24px; }
-      .policy-card { padding: 28px 24px; }
-      .policy-card p { font-size: 1.05rem; }
+      footer { padding: 28px 24px; }
+
+      .badge { font-size: 13px; }
+      .section-sub { font-size: 16px; }
+      .school-type { font-size: 14px; }
+      .services-list li { font-size: 15.5px; }
+      .price-label { font-size: 12px; }
+      .price-currency { font-size: 13px; }
+      .summary-table thead th { font-size: 12px; }
+      .summary-table tbody td { font-size: 16px; }
+      .total-label { font-size: 14px; }
+      .total-currency { font-size: 15px; }
+      .adspend-label { font-size: 15.5px; }
+      .adspend-value { font-size: 1.25rem; }
+      .adspend-note { font-size: 14px; }
+      .closing-text { font-size: 16px; }
+      .final-note-title { font-size: 15px; }
+      .final-note li { font-size: 14.5px; }
+      .footer-copy { font-size: 14px; }
+      .info-card { padding: 24px; }
+      .info-text { font-size: 16px; }
+      .bullet-list li { font-size: 15.5px; }
+      .mini-text { font-size: 15px; }
+      .table-note, .callout, .price-extra { font-size: 14.5px; }
     }
   </style>
 </head>
@@ -293,56 +492,183 @@
   </style>
 
   <div class="hero-content">
-    <div class="badge"><span class="badge-dot"></span>Propuesta Comercial</div>
+    <div class="badge"><span class="badge-dot"></span>Propuesta Comercial · Noviembre 2026</div>
     <h1 class="hero-title">
       Contenido en Video<br />
       <span class="gradient">para GBQ</span>
     </h1>
     <p class="hero-sub">
-      Videos y estrategia para sus productos y máquinas cosméticas,<br />
-      <strong>mes a mes.</strong>
+      Videos profesionales y estrategia mes a mes para mostrar sus productos y máquinas cosméticas<br />
+      <strong>como lo que son: herramientas que generan resultados.</strong>
     </p>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
-     INCLUYE
+     OBJETIVO
 ══════════════════════════════════════════ -->
 <section class="alt">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">¿Qué incluye?</h2>
+      <h2 class="section-title">Objetivo<br /><span class="gradient">de la propuesta</span></h2>
     </div>
-    <div class="includes-wrap">
-      <ul class="includes-list">
-        <li><span class="check">✓</span> 1 día de grabación al mes</li>
-        <li><span class="check">✓</span> 4 videos editados al mes</li>
-        <li><span class="check">✓</span> Estrategia de contenido mes a mes</li>
-      </ul>
+    <div class="info-card">
+      <p class="info-text">Producir cada mes <strong>contenido en video que muestre los productos y máquinas cosméticas de GBQ en acción</strong>: cómo funcionan, qué resultados generan y por qué vale la pena invertir en ellos.</p>
+      <p class="info-text">En la venta de equipos y productos cosméticos el cliente necesita <strong>ver para confiar</strong>. Un buen video reduce dudas, transmite profesionalismo y acompaña el trabajo de pauta que GBQ ya tiene cubierto, entregándole piezas nuevas cada mes.</p>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════
-     PLAN
+     QUÉ INCLUYE
+══════════════════════════════════════════ -->
+<section>
+  <div class="blob" style="width:500px;height:500px;background:radial-gradient(circle,rgba(161,0,255,0.07) 0%,transparent 65%);top:50%;right:-150px;transform:translateY(-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">¿Qué incluye<br /><span class="gradient">el servicio?</span></h2>
+    </div>
+    <div class="grid-3">
+      <div class="mini-card">
+        <div class="mini-num">🎯</div>
+        <div class="mini-title">Estrategia mes a mes</div>
+        <p class="mini-text">Cada mes definimos qué productos o máquinas destacar, los mensajes clave, los guiones y el enfoque de cada video, según las prioridades comerciales de GBQ.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">🎥</div>
+        <div class="mini-title">1 día de grabación al mes</div>
+        <p class="mini-text">Una jornada de grabación planeada con anticipación, con guion y lista de tomas, para aprovechar al máximo el tiempo y capturar todo el material del mes.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">✂️</div>
+        <div class="mini-title">4 videos editados al mes</div>
+        <p class="mini-text">Videos listos para publicar en redes o usar en pauta: edición, música, textos en pantalla, subtítulos y formato vertical.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     IDEAS DE CONTENIDO
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Tipos de video<br /><span class="gradient">que podemos trabajar</span></h2>
+      <p class="section-sub">Algunos ejemplos de contenido para productos y máquinas cosméticas. La mezcla de cada mes se define en la estrategia.</p>
+    </div>
+    <div class="chips">
+      <span class="chip">Demostración de máquinas</span>
+      <span class="chip">Antes y después</span>
+      <span class="chip">Tutoriales de uso</span>
+      <span class="chip">Beneficios del producto</span>
+      <span class="chip">Lanzamientos y novedades</span>
+      <span class="chip">Testimonios de clientes</span>
+      <span class="chip">Preguntas frecuentes</span>
+      <span class="chip">Detrás de cámaras</span>
+      <span class="chip">Comparativos y diferenciales</span>
+    </div>
+    <div class="info-card">
+      <p class="info-text">Los videos de <strong>antes y después</strong> y los testimonios se graban únicamente con autorización de las personas que aparecen, y mostrando resultados reales.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PROCESO
 ══════════════════════════════════════════ -->
 <section>
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Inversión mensual</h2>
+      <h2 class="section-title">Así trabajamos<br /><span class="gradient">cada mes</span></h2>
     </div>
-
-    <div class="plans-grid single">
-      <div class="plan-card">
-        <div class="plan-name">Tarifa Fija</div>
-        <div class="plan-tagline">Un solo pago mensual</div>
-        <div class="plan-price">$1.500.000</div>
-        <div class="plan-unit">COP / mes</div>
+    <div class="grid-2">
+      <div class="mini-card">
+        <div class="mini-num">1</div>
+        <div class="mini-title">Planeación</div>
+        <p class="mini-text">Revisamos con GBQ los productos, promociones y fechas importantes del mes y definimos la estrategia de contenido.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">2</div>
+        <div class="mini-title">Guiones y preproducción</div>
+        <p class="mini-text">Preparamos los guiones, la lista de tomas y lo necesario para el día de grabación (productos, máquinas, modelos, espacio).</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">3</div>
+        <div class="mini-title">Día de grabación</div>
+        <p class="mini-text">Grabamos en una sola jornada todo el material de los 4 videos del mes.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-num">4</div>
+        <div class="mini-title">Edición y entrega</div>
+        <p class="mini-text">Editamos los 4 videos y los enviamos para revisión, con ajustes antes de la entrega final.</p>
       </div>
     </div>
-    <div class="terms-note">
-      <span>⚠️</span>
-      <span><strong>Cancelación:</strong> el servicio se puede cancelar avisando con 30 días de anticipación.</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     INVERSIÓN
+══════════════════════════════════════════ -->
+<section class="alt">
+  <div class="blob" style="width:500px;height:500px;background:radial-gradient(circle,rgba(161,0,255,0.07) 0%,transparent 65%);top:50%;right:-150px;transform:translateY(-50%);filter:blur(70px);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header">
+      <h2 class="section-title">Inversión<br /><span class="gradient">mensual</span></h2>
+    </div>
+
+    <div class="schools-grid">
+      <div class="school-card">
+        <div class="school-avatar">GBQ</div>
+        <div class="school-name">GBQ</div>
+        <div class="school-type">Plan mensual de contenido en video</div>
+        <ul class="services-list">
+          <li><span class="check">✓</span> Estrategia de contenido mes a mes</li>
+          <li><span class="check">✓</span> 1 día de grabación al mes</li>
+          <li><span class="check">✓</span> 4 videos editados al mes</li>
+          <li><span class="check">✓</span> Guiones y preproducción</li>
+          <li><span class="check">✓</span> Videos en formato vertical para redes y pauta</li>
+        </ul>
+        <div class="school-price">
+          <div class="price-label">Tarifa fija</div>
+          <div class="price-amount">$1.500.000</div>
+          <div class="price-currency">COP / mes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CIERRE
+══════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="closing">
+      <div class="blob" style="width:400px;height:300px;background:radial-gradient(circle,rgba(161,0,255,0.1) 0%,transparent 70%);top:-100px;left:50%;transform:translateX(-50%);filter:blur(50px);"></div>
+      <p class="closing-title" style="position:relative;z-index:1;">Contenido nuevo, cada mes</p>
+      <p class="closing-text" style="position:relative;z-index:1;">
+        Queremos que los clientes de <strong>GBQ</strong> vean sus productos y máquinas en acción y lleguen con más confianza a la compra.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONDICIONES
+══════════════════════════════════════════ -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="final-note">
+      <span class="final-note-icon">⚠️</span>
+      <div>
+        <div class="final-note-title">Condiciones</div>
+        <ul>
+          <li>El servicio se puede cancelar avisando con 30 días de anticipación.</li>
+          <li>No incluye pauta digital ni su administración, ya que GBQ tiene ese servicio cubierto. Los videos se entregan listos para que su equipo de pauta los use.</li>
+          <li>El día de grabación se agenda con anticipación; GBQ facilita los productos, máquinas y el espacio para grabar.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
